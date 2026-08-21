@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>热点审核</title>
+<style>
+  :root { --bg:#f5f5f7; --card:#fff; --text:#1d1d1f; --sub:#86868b; --blue:#0071e3; --green:#34c759; --red:#ff3b30; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,"PingFang SC","Microsoft YaHei",sans-serif; padding-bottom: 48px; }
+  header { position: sticky; top: 0; background: rgba(245,245,247,.9); backdrop-filter: blur(12px); padding: 16px 16px 8px; z-index: 10; }
+  h1 { font-size: 22px; font-weight: 700; }
+  .tabs { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; }
+  .tab { padding: 8px 14px; border-radius: 999px; background: #e8e8ed; font-size: 14px; white-space: nowrap; }
+  .tab.active { background: var(--blue); color: #fff; }
+  .wrap { padding: 12px 16px; }
+  .date { color: var(--sub); font-size: 13px; margin-bottom: 12px; }
+  .card { background: var(--card); border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+  .card h3 { font-size: 17px; line-height: 1.35; margin-bottom: 6px; }
+  .meta { font-size: 12px; color: var(--sub); margin-bottom: 8px; }
+  .summary { font-size: 14px; color: #3a3a3c; line-height: 1.5; margin-bottom: 8px; }
+  .reason { font-size: 13px; color: var(--blue); margin-bottom: 12px; }
+  .score { font-size: 15px; font-weight: 700; }
+  .btns { display: flex; gap: 8px; }
+  button { flex: 1; padding: 10px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; }
+  .b-write { background: var(--green); color: #fff; }
+  .b-no { background: #e8e8ed; color: var(--text); }
+  .b-edit { background: var(--blue); color: #fff; }
+  .note { width: 100%; padding: 10px; border: 1px solid #d1d1d6; border-radius: 10px; font-size: 14px; margin-top: 10px; }
+  .article { border-top: 1px solid #e5e5ea; margin-top: 14px; padding-top: 12px; }
+  .article h4 { font-size: 15px; color: var(--sub); margin-bottom: 8px; }
+  .seg { font-size: 14px; line-height: 1.55; margin-bottom: 10px; white-space: pre-wrap; }
+  textarea { width: 100%; min-height: 64px; padding: 10px; border: 1px solid #d1d1d6; border-radius: 10px; font-size: 14px; font-family: inherit; }
+  .actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .b-polish { background: #ff9500; color: #fff; }
+  .b-confirm { background: var(--blue); color: #fff; }
+  .b-download { background: var(--green); color: #fff; }
+  a.dl { text-decoration: none; }
+  .badge { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: #e8e8ed; margin-left: 6px; }
+  .badge.ok { background: #d1f0d3; color: #1a7f37; }
+  .badge.warn { background: #ffe5a3; color: #9a6a00; }
+</style>
+</head>
+<body>
+<header>
+  <h1>热点审核</h1>
+  <div class="tabs" id="tabs"></div>
+</header>
+<div class="wrap" id="main"></div>
+
+<script>
+let domains = [];
+let current = null;
+
+async function j(url, opt) { const r = await fetch(url, opt); if (!r.ok) throw new Error(await r.text()); return r.json(); }
+
+async function init() {
+  domains = await j('/api/domains');
+  if (!domains.length) { document.getElementById('main').innerHTML = '<p>暂无启用领域</p>'; return; }
+  renderTabs();
+  current = domains[0].id;
+  await loadToday();
+}
+
+function renderTabs() {
+  const el = document.getElementById('tabs');
+  el.innerHTML = domains.map(d => `<div class="tab ${d.id===current?'active':''}" data-id="${d.id}">${d.name}</div>`).join('');
+  el.querySelectorAll('.tab').forEach(t => t.onclick = async () => { current = t.dataset.id; renderTabs(); await loadToday(); });
+}
+
+async function loadToday() {
+  const data = await j('/api/today?domain_id=' + current);
+  const html = `
+    <div class="date">${data.date} · ${data.candidates.length} 条候选</div>
+    ${data.candidates.map(c => candCard(c)).join('')}
+    ${data.articles.map(a => articleCard(a)).join('')}
+  `;
+  document.getElementById('main').innerHTML = html;
+}
+
+function candCard(c) {
+  const a = c.assess || {};
+  const score = a.total != null ? a.total.toFixed(1) : '—';
+  const reason = c.reason || (a.one_line || '');
+  return `<div class="card">
+    <h3>${esc(c.title)}</h3>
+    <div class="meta">${esc(c.source)} · 评分 <span class="score">${score}</span>${a.verdict?` · ${a.verdict}`:''}</div>
+    ${c.summary ? `<div class="summary">${esc(c.summary)}</div>` : ''}
+    ${reason ? `<div class="reason">${esc(reason)}</div>` : ''}
+    <div class="btns">
+      <button class="b-write" onclick="decide(${c.id},'selected')">写</button>
+      <button class="b-no" onclick="decide(${c.id},'rejected')">不写</button>
+      <button class="b-edit" onclick="editAngle(${c.id})">改角度</button>
+    </div>
+    <input class="note" id="note-${c.id}" placeholder="批注/角度建议（可选）">
+  </div>`;
+}
+
+async function decide(id, decision) {
+  const note = document.getElementById('note-' + id)?.value || '';
+  await j(`/api/candidates/${id}/decision`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({decision, note}) });
+  await loadToday();
+}
+
+function editAngle(id) {
+  const input = document.getElementById('note-' + id);
+  input.placeholder = '填新角度，然后点「写」';
+  input.focus();
+}
+
+async function articleCard(a) {
+  let art = null;
+  try { art = await j('/api/articles/' + a.id); } catch(e) {}
+  if (!art) return `<div class="card article"><h4>${esc(a.title||'草稿')}</h4></div>`;
+  const body = art.body || {};
+  const segs = (body.body||[]).map(s => `<div class="seg"><b>${s.type}</b>：${esc(s.text)}</div>`).join('');
+  const verify = (art.todo_verify||[]).map(v => `<div class="badge warn">待查证：${esc(typeof v==='string'?v:(v.claim||''))}</div>`).join('');
+  return `<div class="card article">
+    <h4>${esc(art.title||'未命名')} <span class="badge ${art.status==='packaged'?'ok':''}">${art.status}</span></h4>
+    ${segs}
+    <div>${verify}</div>
+    <textarea id="fb-${art.id}" placeholder="对草稿的修改建议（整篇或某段）"></textarea>
+    <div class="actions">
+      <button class="b-polish" onclick="polish(${art.id})">按批注润色</button>
+      <button class="b-confirm" onclick="confirmPkg(${art.id})">确认并生成卡片</button>
+    </div>
+  </div>`;
+}
+
+async function polish(id) {
+  const text = document.getElementById('fb-' + id).value.trim();
+  if (!text) { alert('先写点批注'); return; }
+  await j(`/api/articles/${id}/feedback`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({feedback:[{scope:'whole', text}]}) });
+  const r = await j(`/api/articles/${id}/polish`, { method:'POST' });
+  alert('已润色：' + r.title);
+  await loadToday();
+}
+
+async function confirmPkg(id) {
+  if (!confirm('确认后生成卡片与发布包（可重复生成）？')) return;
+  const r = await j(`/api/articles/${id}/confirm`, { method:'POST' });
+  alert('已生成发布包，含 ' + r.cards + ' 张卡片');
+  await loadToday();
+  window.open(`/api/packages/${r.package_id}/download`);
+}
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; }
+init();
+</script>
+</body>
+</html>

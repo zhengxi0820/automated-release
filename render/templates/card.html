@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --apple-bg-elevated: #FBFBFD;
+    --apple-bg-light-gray: #F5F5F7;
+    --apple-text-primary: #1D1D1F;
+    --apple-text-secondary: #6E6E73;
+    --apple-text-tertiary: #86868B;
+    --apple-link-blue: #0066CC;
+    --apple-font-zh: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    --apple-tracking-zh-title: 0.04em;
+    --apple-leading-title: 1.15;
+    --apple-leading-body: 1.53;
+    --apple-weight-black: 900;
+    --apple-weight-heavy: 800;
+    --apple-weight-medium: 500;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1440px;
+    font-family: var(--apple-font-zh);
+    background: linear-gradient(180deg, var(--apple-bg-elevated) 0%, var(--apple-bg-light-gray) 100%);
+    color: var(--apple-text-primary);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 60px 64px 48px;
+    overflow: hidden;
+  }
+  .top { display: flex; justify-content: space-between; align-items: baseline; font-size: 22px; color: var(--apple-text-tertiary); letter-spacing: 0.02em; }
+  .brand { font-weight: 600; }
+  .main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .label { font-size: 24px; font-weight: var(--apple-weight-heavy); color: var(--apple-link-blue); letter-spacing: 0.12em; margin-bottom: 28px; }
+  .cover-title { font-size: 68px; line-height: var(--apple-leading-title); font-weight: var(--apple-weight-black); letter-spacing: var(--apple-tracking-zh-title); }
+  .cover-sub { margin-top: 28px; font-size: 28px; color: var(--apple-text-secondary); line-height: 1.5; font-weight: 400; }
+  .body-text { font-size: 32px; line-height: var(--apple-leading-body); font-weight: 400; letter-spacing: 0.01em; }
+  .foot { display: flex; justify-content: space-between; font-size: 20px; color: var(--apple-text-tertiary); }
+  .tag { color: var(--apple-link-blue); }
+</style>
+</head>
+<body>
+  <div class="top"><span class="brand">AI 工具观察</span><span class="kicker">{{kicker}}</span></div>
+  <div class="main">
+    {{body}}
+  </div>
+  <div class="foot"><span>{{seq}} / {{total}}</span><span class="tag">{{tag}}</span></div>
+</body>
+</html>

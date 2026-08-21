@@ -1,0 +1,76 @@
+id: ai-tools
+name: AI 工具与效率
+enabled: true
+
+schedule:
+  time: "08:00"
+  timezone: Asia/Shanghai
+  candidates_ready_by: "08:30"
+
+sources:
+  - name: aihot
+    params:
+      mode: selected
+      window: 24h
+      extra_endpoints: ["hot-topics"]
+      min_interval_seconds: 60
+      use_etag_cache: true
+  - name: weibo_hot
+    params:
+      keywords: ["AI", "人工智能", "大模型", "智能体", "AI工具"]
+  - name: zhihu_hot
+    params:
+      section: tech
+  - name: toutiao_hot
+    params:
+      category: tech
+  - name: baidu_hot
+    params: {}
+  - name: github_trending
+    params:
+      keywords: ["ai", "agent", "llm", "mcp"]
+      min_stars: 200
+
+assess:
+  weights:
+    heat: 0.30
+    controversy: 0.20
+    domain_match: 0.25
+    writable: 0.15
+    risk: 0.10
+  min_score: 6.0
+  candidate_budget: 10
+  daily_select_max: 2
+  risk_max_for_keep: 1   # risk 维度 >1 直接淘汰
+
+llm:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.6
+  budget_monthly: 30
+
+writing:
+  max_length: 800
+  title_max_chars: 20
+  card_count_min: 5
+  card_count_max: 7
+  tone: apple-clean
+  include_tags: ["#AI工具", "#效率工具"]
+
+compliance:
+  block_categories:
+    - politics
+    - society-controversy
+    - health
+    - legal
+    - finance-advice
+  block_keywords: []
+  require_ai_label: true
+
+notify:
+  channel: pushplus
+  events:
+    - candidates_ready
+    - draft_ready
+    - budget_alert
+    - pipeline_failed

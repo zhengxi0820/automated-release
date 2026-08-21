@@ -1,0 +1,9 @@
+.env
+data/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+_archive/
+tests/fixtures/generated/
+domains/*/templates/.cache/
