@@ -18,31 +18,30 @@ body {
   padding: 90px 130px 50px;
 }
 main { flex: 1; }
-.hln { font-size: 40px; line-height: 60px; font-weight: 500; }
-.pln { font-size: 30px; line-height: 45px; font-weight: 400; text-align: justify; text-align-last: justify; }
+.hln { font-size: 45px; line-height: 90px; font-weight: 700; }
+.pln { font-size: 37px; line-height: 74px; font-weight: 500; text-align: justify; text-align-last: justify; }
 .pln.last { text-align-last: auto; }
-.pageno {
-  position: absolute; right: 130px; bottom: 18px;
-  font-size: 22px; color: var(--ink-3); font-weight: 400; letter-spacing: .12em;
-}
 </style>
 </head>
 <body>
 <main>
-<div class="pln">再啰嗦一句心态：模型圈这两年最不缺的是「史上最强」，最</div>
-<div class="pln">缺的是「稳定可用」。参数上的十倍，落到具体工作流里常常</div>
-<div class="pln">只有一倍半；反过来，一次平台抖动，就可能让你的一天白干</div>
-<div class="pln last">。慢慢来，比较快。</div>
-<div style="height:45px"></div>
-<div class="pln">如果你只有两分钟，就记三句话：第一，V4 Pro 在硅基流动</div>
-<div class="pln">，可以直接试；第二，1M 上下文对长文档是真需求，值得亲</div>
-<div class="pln">自验证；第三，价格和稳定性没落地之前，核心任务别动。其</div>
-<div class="pln last">余的，交给时间。</div>
-<div style="height:45px"></div>
-<div class="pln">最后留个问题：你会为了 1M 上下文换模型吗？你手头最想整</div>
-<div class="pln">包塞进去的，又是哪份资料？评论区聊聊，攒够了我就整理一</div>
-<div class="pln last">篇「评论区实测合集」，让后来的人少踩坑。</div>
+<div class="pln">说个我自己的场景。之前处理一份五百页的行业 P</div>
+<div class="pln">DF，模型每轮只能吃进去几十页，我只好手动切</div>
+<div class="pln">成十几段，一段一段喂。更麻烦的是，还得自己维</div>
+<div class="pln">护一份「前面聊过什么」的摘要，每次都附在提问</div>
+<div class="pln last">后面，流程又慢又容易出错。</div>
+<div style="height:74px"></div>
+<div class="pln">当时的流程大致是这样：先把 PDF 按章节切块、</div>
+<div class="pln">编号；每次提问，附上问题相关的两三块，再贴一</div>
+<div class="pln">段滚动摘要；模型答完，手动把新结论补回摘要。</div>
+<div class="pln">一次完整的追问，来回要折腾半小时，精力全花在</div>
+<div class="pln last">「喂」上，而不是「想」上。</div>
+<div style="height:74px"></div>
+<div class="pln">最气人的是，很多结论偏偏藏在对照里。第 12 页</div>
+<div class="pln">的一个数字，要对上第 300 页的一句表述，切块</div>
+<div class="pln">喂的时候，这两段根本不在同一个对话里，模型想</div>
+<div class="pln last">帮也对不上。</div>
+<div style="height:74px"></div>
 </main>
-<div class="pageno">8 / 8</div>
 </body>
 </html>

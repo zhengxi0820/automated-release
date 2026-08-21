@@ -21,16 +21,16 @@ OUT = Path(__file__).resolve().parent / "preview" / "c4"
 CHROME = Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe")
 
 # ── 排版常量（1080x1440 画布）──
-F_BODY = 30          # 正文（= 参考 15px × 2）
-F_HEAD = 40          # 标题（4/3 倍）
-LH_BODY = int(F_BODY * 1.5)   # 45
-LH_HEAD = int(F_HEAD * 1.5)   # 60
+F_BODY = 37          # 正文
+F_HEAD = 45          # 标题
+LH_BODY = F_BODY * 2          # 行距 2 倍字体高度 = 74
+LH_HEAD = F_HEAD * 2          # 标题行距 = 90
+PARA_GAP = LH_BODY           # 段间空一行 = 74
 PAD_X = 130
-PAD_TOP = 90         # 上下留白 ≈ 2 行
+PAD_TOP = 90
 PAD_BOTTOM = 50
-USABLE_EM = (1080 - PAD_X * 2) / F_BODY   # 27.3 em
-LINE_CAP = 27.0      # 每行容量（em），保守取整
-HEAD_CAP = (1080 - PAD_X * 2) / F_HEAD    # 20.5 em
+LINE_CAP = float(int((1080 - PAD_X * 2) / F_BODY))   # 22 字/行
+HEAD_CAP = float(int((1080 - PAD_X * 2) / F_HEAD))   # 18 字/行
 CONTENT_H = 1440 - PAD_TOP - PAD_BOTTOM   # 1300
 
 BRAND = "AI 工具观察"
@@ -121,13 +121,13 @@ def build_units(sections, use_headings=True) -> list[dict]:
     units: list[dict] = []
     for i, (head, paras) in enumerate(sections):
         if use_headings and i > 0:
-            units.append({"kind": "gap", "h": LH_BODY})
+            units.append({"kind": "gap", "h": PARA_GAP})
         if use_headings:
             units.append({"kind": "h", "lines": wrap(head, HEAD_CAP - 0.3)})
-            units.append({"kind": "gap", "h": LH_BODY})
+            units.append({"kind": "gap", "h": PARA_GAP})
         for j, p in enumerate(paras):
             if j > 0:
-                units.append({"kind": "gap", "h": LH_BODY})
+                units.append({"kind": "gap", "h": PARA_GAP})
             units.append({"kind": "p", "lines": wrap(p, LINE_CAP)})
     return units
 
@@ -187,13 +187,9 @@ body {{
   padding: {PAD_TOP}px {PAD_X}px {PAD_BOTTOM}px;
 }}
 main {{ flex: 1; }}
-.hln {{ font-size: {F_HEAD}px; line-height: {LH_HEAD}px; font-weight: 500; }}
-.pln {{ font-size: {F_BODY}px; line-height: {LH_BODY}px; font-weight: 400; text-align: justify; text-align-last: justify; }}
+.hln {{ font-size: {F_HEAD}px; line-height: {LH_HEAD}px; font-weight: 700; }}
+.pln {{ font-size: {F_BODY}px; line-height: {LH_BODY}px; font-weight: 500; text-align: justify; text-align-last: justify; }}
 .pln.last {{ text-align-last: auto; }}
-.pageno {{
-  position: absolute; right: {PAD_X}px; bottom: 18px;
-  font-size: 22px; color: var(--ink-3); font-weight: 400; letter-spacing: .12em;
-}}
 """
 
 
@@ -211,11 +207,11 @@ def _page(body: str, extra_css: str = "") -> str:
 </html>"""
 
 
-def render_flow_page(units: list[dict], page_no: int, total: int) -> str:
+def render_flow_page(units: list[dict]) -> str:
     html_lines: list[str] = ["<main>"]
     for u in units:
         if u["kind"] == "gap":
-            html_lines.append(f'<div style="height:{LH_BODY}px"></div>')
+            html_lines.append(f'<div style="height:{PARA_GAP}px"></div>')
         elif u["kind"] == "h":
             for ln in u["lines"]:
                 html_lines.append(f'<div class="hln">{ln}</div>')
@@ -225,11 +221,10 @@ def render_flow_page(units: list[dict], page_no: int, total: int) -> str:
                 cls = "pln last" if k == n - 1 else "pln"
                 html_lines.append(f'<div class="{cls}">{ln}</div>')
     html_lines.append("</main>")
-    html_lines.append(f'<div class="pageno">{page_no} / {total}</div>')
     return _page("\n".join(html_lines))
 
 
-def cover(total: int) -> str:
+def cover() -> str:
     items = "".join(
         f'<div class="toc-item"><span class="no">{h.split("、")[0]}、</span><span class="what">{h.split("、", 1)[1]}</span></div>'
         for h, _ in SECTIONS
@@ -241,8 +236,8 @@ def cover(total: int) -> str:
 .toc { margin-top: 70px; }
 .toc-item { display: flex; align-items: baseline; gap: 26px; padding: 24px 0; border-top: 1.5px solid var(--hairline); }
 .toc-item:first-child { border-top: none; }
-.toc-item .no { font-size: 40px; font-weight: 600; color: var(--ink); }
-.toc-item .what { font-size: 38px; font-weight: 500; }
+.toc-item .no { font-size: 40px; font-weight: 700; color: var(--ink); }
+.toc-item .what { font-size: 38px; font-weight: 600; }
 main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 """
     body = f"""
@@ -250,21 +245,20 @@ main { flex: 1; display: flex; flex-direction: column; justify-content: center; 
   <p class="lede">AI 圈疯传的 DeepSeek 更新 · {DATE}</p>
   <h1 class="cover-title">V4 Pro <u>悄悄上线</u>，<br>普通人先别急着换</h1>
   <div class="toc">{items}</div>
-</main>
-<div class="pageno">1 / {total}</div>"""
+</main>"""
     return _page(body, css)
 
 
 def render() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     pages = paginate(build_units(SECTIONS, use_headings=True))
-    total = len(pages) + 1  # + 封面
-    shots = [("page_01", cover(total))]
+    print(f"分页：封面 + {len(pages)} 页正文")
+    shots = [("page_01", cover())]
     for i, units in enumerate(pages, start=2):
-        shots.append((f"page_{i:02d}", render_flow_page(units, i, total)))
+        shots.append((f"page_{i:02d}", render_flow_page(units)))
     # 无标题散文模式样本（第 1 页）
-    prose_units = paginate(build_units([("", PROSE_PARAS[:6])], use_headings=False))[0]
-    shots.append(("prose_mode", render_flow_page(prose_units, 1, 1)))
+    prose_units = paginate(build_units([("", PROSE_PARAS[:4])], use_headings=False))[0]
+    shots.append(("prose_mode", render_flow_page(prose_units)))
 
     for name, html in shots:
         html_path = OUT / f"{name}.html"
