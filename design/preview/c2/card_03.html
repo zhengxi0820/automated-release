@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@250;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-white: #FFFFFF; --text-primary: #1D1D1F; --text-secondary: #6E6E73;
+  --text-tertiary: #86868B; --blue: #0066CC; --hairline: #D2D2D7;
+  --hl-blue: rgba(0,102,204,.16); --hl-yellow: rgba(255,204,0,.38);
+  --font: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--font); background: var(--bg-white); color: var(--text-primary);
+  display: flex; flex-direction: column; padding: 84px 96px 72px; position: relative;
+}
+.spine {
+  position: absolute; right: 38px; top: 50%; transform: translateY(-50%);
+  writing-mode: vertical-rl; font-size: 24px; letter-spacing: .5em;
+  color: var(--text-tertiary); font-weight: 500;
+}
+header .rule { height: 2px; background: var(--text-primary); }
+main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+footer { margin-top: auto; }
+footer .rule { height: 1.5px; background: var(--hairline); }
+.foot-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 24px; }
+.foot-row .tag { font-size: 25px; color: var(--blue); font-weight: 600; }
+.foot-row .page { font-size: 28px; color: var(--text-tertiary); font-weight: 600; letter-spacing: .08em; }
+
+/* 封面 */
+.lede { font-size: 30px; color: var(--text-secondary); letter-spacing: .1em; font-weight: 600; margin-bottom: 36px; }
+.cover-title { font-size: 96px; line-height: 1.22; font-weight: 900; letter-spacing: .03em; }
+.cover-title u {
+  text-decoration: none; border-bottom: 10px solid var(--hl-yellow); padding-bottom: 4px;
+}
+.toc { margin-top: 56px; padding-top: 40px; border-top: 1.5px solid var(--hairline); }
+.toc .toc-title { font-size: 26px; color: var(--text-tertiary); letter-spacing: .16em; font-weight: 600; margin-bottom: 26px; }
+.toc-item { display: flex; align-items: baseline; gap: 24px; padding: 14px 0; }
+.toc-item .no { font-size: 30px; font-weight: 800; color: var(--blue); font-variant-numeric: tabular-nums; }
+.toc-item .what { font-size: 32px; font-weight: 500; color: var(--text-primary); }
+.toc-item .why { font-size: 26px; color: var(--text-tertiary); margin-left: auto; text-align: right; }
+
+/* 内容页 */
+.sec-head { display: flex; align-items: baseline; gap: 28px; margin-bottom: 12px; }
+.sec-no { font-size: 88px; font-weight: 250; color: var(--text-primary); letter-spacing: -.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.sec-title { font-size: 46px; font-weight: 800; letter-spacing: .04em; }
+.sec-sub { font-size: 26px; color: var(--text-tertiary); font-weight: 500; margin-bottom: 44px; letter-spacing: .06em; }
+.para { font-size: 36px; line-height: 1.72; font-weight: 400; color: var(--text-primary); }
+.para + .para { margin-top: 34px; }
+.para.dim { color: var(--text-secondary); }
+.para b { font-weight: 800; background: linear-gradient(transparent 66%, var(--hl-blue) 0); }
+.quote {
+  margin-top: 40px; padding: 30px 36px; border-left: 8px solid var(--text-primary);
+  background: #F5F5F7; font-size: 34px; line-height: 1.65; font-weight: 500; border-radius: 0 18px 18px 0;
+}
+.quote b { font-weight: 800; }
+.meta-row { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+.meta-pill {
+  font-size: 25px; font-weight: 600; color: var(--text-secondary);
+  background: #F5F5F7; border-radius: 980px; padding: 12px 26px;
+}
+</style>
+</head>
+<body>
+
+<span class="spine">AI 工具观察</span>
+<header><div class="rule"></div></header>
+<main>
+  <div class="sec-head"><span class="sec-no">03</span><span class="sec-title">怎么理解</span></div>
+  <p class="sec-sub">MY TAKE · 观点</p>
+  
+  <p class="para">1M 上下文对长文档处理是<b>实打实的刚需</b>：一次性塞进一本书的量，不用再手动切分。但新模型刚上，性能稳不稳、收费贵不贵，都得实测才知道。</p>
+  <div class="quote">当上下文不再是瓶颈，<b>你怎么提问</b>反而成了新的瓶颈。</div>
+</main>
+<footer>
+  <div class="rule"></div>
+  <div class="foot-row"><span class="tag">#AI工具</span><span class="page">03 — 05</span></div>
+</footer>
+</body>
+</html>
