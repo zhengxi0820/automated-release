@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --text-primary: #1D1D1F; --text-secondary: #6E6E73; --text-tertiary: #86868B;
+  --blue: #0066CC; --hairline: #D2D2D7;
+  --hl-blue: rgba(0,102,204,.16); --hl-yellow: rgba(255,204,0,.40);
+  --font: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--font); background: #FFFFFF; color: var(--text-primary);
+  display: flex; flex-direction: column;
+  padding: 93px 130px 44px;   /* 上下留白 ≈ 1.5 行（93px），底部含页脚 */
+}
+main { flex: 1; display: flex; flex-direction: column; }
+
+/* 内容页大标题：68px = 正文的 1.7 倍，编号与标题同字号 */
+.sec-title {
+  font-size: 68px; line-height: 1.32; font-weight: 900; letter-spacing: .02em;
+  margin-bottom: 44px;
+}
+.sec-title .no { font-variant-numeric: tabular-nums; }
+
+/* 正文：40px / 62px，每行 20 字，两端对齐 */
+.body { display: flex; flex-direction: column; gap: 30px; }  /* 段距 ≈ 半行 */
+.para { font-size: 40px; line-height: 62px; font-weight: 400; text-align: justify; }
+.para.dim { color: var(--text-secondary); }
+.para b { font-weight: 800; background: linear-gradient(transparent 68%, var(--hl-blue) 0); }
+
+/* 引用块：占两行正文的高度节奏 */
+.quote {
+  padding: 26px 34px; border-left: 8px solid var(--text-primary);
+  background: #F5F5F7; font-size: 40px; line-height: 62px; font-weight: 600;
+  border-radius: 0 18px 18px 0; text-align: justify;
+}
+
+.meta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+.meta-pill {
+  font-size: 27px; font-weight: 600; color: var(--text-secondary);
+  background: #F5F5F7; border-radius: 980px; padding: 10px 26px;
+}
+
+/* 封面 */
+.lede { font-size: 30px; color: var(--text-secondary); letter-spacing: .12em; font-weight: 600; margin-bottom: 34px; }
+.cover-title { font-size: 84px; line-height: 1.28; font-weight: 900; letter-spacing: .02em; }
+.cover-title u { text-decoration: none; border-bottom: 12px solid var(--hl-yellow); padding-bottom: 6px; }
+.toc { margin-top: 64px; }
+.toc-item { display: flex; align-items: baseline; gap: 26px; padding: 21px 0; border-top: 1.5px solid var(--hairline); }
+.toc-item:first-child { border-top: none; }
+.toc-item .no { font-size: 44px; font-weight: 900; color: var(--blue); }
+.toc-item .what { font-size: 40px; font-weight: 700; }
+
+/* 页脚：贴底，thin 规线 + 一行小字 */
+footer { margin-top: auto; padding-top: 26px; }
+footer .rule { height: 1.5px; background: var(--hairline); }
+.foot-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 20px; }
+.foot-row .tag { font-size: 25px; color: var(--blue); font-weight: 600; }
+.foot-row .page { font-size: 25px; color: var(--text-tertiary); font-weight: 600; letter-spacing: .08em; }
+</style>
+</head>
+<body>
+
+<main>
+  <p class="lede">AI 圈疯传的 DeepSeek 更新 · 08.21</p>
+  <h1 class="cover-title">V4 Pro <u>悄悄上线</u>，<br>普通人先别急着换</h1>
+  <div class="toc"><div class="toc-item"><span class="no">一、</span><span class="what">上线硅基流动，上下文 1M</span></div><div class="toc-item"><span class="no">二、</span><span class="what">1M 上下文是一本书的量</span></div><div class="toc-item"><span class="no">三、</span><span class="what">500 页 PDF 不用再分段</span></div><div class="toc-item"><span class="no">四、</span><span class="what">先小项目试水，别急迁移</span></div></div>
+</main>
+<footer>
+  <div class="rule"></div>
+  <div class="foot-row"><span class="tag">#AI工具</span><span class="page">1 / 5</span></div>
+</footer>
+</body>
+</html>
