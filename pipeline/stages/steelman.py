@@ -9,7 +9,7 @@ from ..llm import get_provider
 
 
 def run_steelman(domain: DomainConfig, candidate: dict, research: dict | None = None) -> dict:
-    provider = get_provider(domain.provider)
+    provider = get_provider(domain.provider, domain.model)
     tpl = (PROMPTS_DIR / "steelman.md").read_text(encoding="utf-8")
     prompt = (
         tpl.replace("{{domain_name}}", domain.name)

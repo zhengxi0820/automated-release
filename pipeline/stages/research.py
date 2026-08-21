@@ -28,7 +28,7 @@ def _fetch_text(url: str, limit: int = 4000) -> str:
 
 
 def run_research(domain: DomainConfig, candidate: dict) -> dict:
-    provider = get_provider(domain.provider)
+    provider = get_provider(domain.provider, domain.model)
     prompt_tpl = (PROMPTS_DIR / "research.md").read_text(encoding="utf-8")
 
     materials = []

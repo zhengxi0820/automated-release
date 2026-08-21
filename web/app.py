@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from datetime import date
 from pathlib import Path
@@ -98,12 +99,14 @@ def api_add_candidate(body: ManualCandidate):
         raise HTTPException(404, "领域不存在")
     from pipeline.db import insert_candidate
 
+    # sha256 保证跨进程稳定（内置 hash 每次启动随机化，会导致重复插入）
+    stable_id = hashlib.sha256(body.title.encode("utf-8")).hexdigest()[:16]
     cid = insert_candidate(
         {
             "domain_id": body.domain_id,
             "date": today_cn(),
             "source": "manual",
-            "source_item_id": f"manual-{abs(hash(body.title))}",
+            "source_item_id": f"manual-{stable_id}",
             "title": body.title,
             "summary": body.note,
             "category": "",

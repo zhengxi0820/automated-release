@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import json
 import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TEMPLATE = ROOT / "render" / "templates" / "card.html"
+DEFAULT_TEMPLATE = ROOT / "render" / "templates" / "card.html"
 OUTPUT_DIR = ROOT / "data" / "output"
 CHROME = Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe")
 
@@ -22,8 +21,14 @@ KIND_LABELS = {
 }
 
 
-def _card_html(card: dict, seq: int, total: int, domain_name: str, tag: str) -> str:
-    tpl = TEMPLATE.read_text(encoding="utf-8")
+def _template_for(domain_id: str) -> Path:
+    """领域模板优先（domains/<id>/templates/card.html），缺省用全局模板。"""
+    domain_tpl = ROOT / "domains" / domain_id / "templates" / "card.html"
+    return domain_tpl if domain_tpl.exists() else DEFAULT_TEMPLATE
+
+
+def _card_html(card: dict, seq: int, total: int, domain_name: str, tag: str, template: Path) -> str:
+    tpl = template.read_text(encoding="utf-8")
     kind = card.get("kind", "opinion")
     text = (card.get("text") or "").strip()
     subtext = (card.get("subtext") or "").strip()
@@ -54,9 +59,10 @@ def render_article(domain_id: str, article_id: int, domain_name: str, cards: lis
     out_dir.mkdir(parents=True, exist_ok=True)
 
     total = len(cards)
+    template = _template_for(domain_id)
     paths: list[Path] = []
     for i, card in enumerate(cards, start=1):
-        html = _card_html(card, i, total, domain_name, tag)
+        html = _card_html(card, i, total, domain_name, tag, template)
         html_path = out_dir / f"card_{i:02d}.html"
         png_path = out_dir / f"card_{i:02d}.png"
         html_path.write_text(html, encoding="utf-8")

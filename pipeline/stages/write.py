@@ -25,7 +25,7 @@ def _has_fabricated_experience(body: dict) -> list[str]:
 
 
 def run_write(domain: DomainConfig, candidate: dict, research: dict, steelman: dict | None = None) -> dict:
-    provider = get_provider(domain.provider)
+    provider = get_provider(domain.provider, domain.model)
     tpl = (PROMPTS_DIR / "write.md").read_text(encoding="utf-8")
 
     prompt = (

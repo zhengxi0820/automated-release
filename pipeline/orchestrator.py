@@ -10,14 +10,13 @@ from .config import load_domain
 from .db import (
     create_article,
     finish_run,
-    get_article,
     init_db,
     insert_candidate,
-    insert_cards,
     list_candidates,
     set_assess,
     set_decision,
     start_run,
+    sweep_stale_runs,
     update_article,
 )
 from .sources import get_source
@@ -50,6 +49,7 @@ def run_daily(domain_id: str, date: str | None = None, until: str = "assess", au
         raise ValueError(f"领域不存在: {domain_id}")
     date = date or today_cn()
     init_db()
+    sweep_stale_runs()
     run_id = start_run(domain.id, date)
 
     try:
@@ -115,13 +115,12 @@ def run_daily(domain_id: str, date: str | None = None, until: str = "assess", au
             return {"run_id": run_id, "stage": "waiting_review", "domain": domain.id, "date": date,
                     "message": "无人选候选，等待审核界面操作"}
 
-        # 4) 逐条：调研 → 成文
+        # 4) 逐条：调研 → 成文（成文成功后才建 article，失败不留僵尸草稿）
         for cand in selected:
             research = run_research(domain, cand)
             steelman = run_steelman(domain, cand, research)
-            article_id = create_article(int(cand["id"]), domain.id)
-            article = get_article(article_id)
             draft = run_write(domain, cand, research, steelman)
+            article_id = create_article(int(cand["id"]), domain.id)
             update_article(
                 article_id,
                 {

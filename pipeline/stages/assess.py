@@ -12,7 +12,7 @@ def _load_prompt(name: str) -> str:
 
 
 def run_assess(domain: DomainConfig, date: str) -> list[dict]:
-    provider = get_provider(domain.provider)
+    provider = get_provider(domain.provider, domain.model)
     prompt_tpl = _load_prompt("assess.md")
     w = domain.assess_weights
     kept = []
@@ -42,8 +42,15 @@ def run_assess(domain: DomainConfig, date: str) -> list[dict]:
             if verdict == "blocked":
                 set_assess(int(row["id"]), {**result, "total": 0.0})
                 continue
-            if verdict == "worth_discussing":
-                kept.append({"candidate": dict(row), "assess": result})
+            if verdict != "worth_discussing":
+                continue
+            total = float(result.get("total") or 0)
+            risk = float((result.get("dimensions") or {}).get("risk") or 0)
+            if total < domain.min_score:
+                continue
+            if risk > float(domain.assess.get("risk_max_for_keep", 1)):
+                continue
+            kept.append({"candidate": dict(row), "assess": result})
         except Exception as exc:  # noqa: BLE001
             print(f"[assess] 候选 {row['id']} 评估失败: {exc}")
 

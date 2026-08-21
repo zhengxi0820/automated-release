@@ -13,7 +13,8 @@ BASE = "https://api.deepseek.com/chat/completions"
 
 
 class DeepSeekProvider(LLMProvider):
-    def __init__(self):
+    def __init__(self, model: str = "deepseek-chat"):
+        self.model = model
         self.api_key = env("DEEPSEEK_API_KEY")
         if not self.api_key:
             raise RuntimeError("缺少 DEEPSEEK_API_KEY（请在 .env 中配置）")
@@ -27,7 +28,7 @@ class DeepSeekProvider(LLMProvider):
         max_tokens: int = 4096,
     ) -> str | dict:
         payload = {
-            "model": "deepseek-chat",
+            "model": self.model,
             "messages": [
                 *([{"role": "system", "content": system}] if system else []),
                 {"role": "user", "content": prompt},

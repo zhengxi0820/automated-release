@@ -13,24 +13,32 @@ RESP = {
 }
 
 
+def _patch_provider(monkeypatch, resp):
+    monkeypatch.setattr("pipeline.stages.assess.get_provider", lambda name, model=None: FakeProvider(resp))
+
+
+def _insert(d, item_id, **over):
+    rec = {
+        "domain_id": d.id,
+        "date": "2026-08-15",
+        "source": "aihot",
+        "source_item_id": item_id,
+        "title": "GLM-5.3 发布",
+        "summary": "编程能力开源第一",
+        "category": "ai-models",
+        "source_score": 82,
+        "reason": "值得关注",
+        "url": "https://example.com",
+        "created_at": "2026-08-15T08:00:00+08:00",
+    }
+    rec.update(over)
+    insert_candidate(rec)
+
+
 def test_assess_worth_discussing(tmp_db, monkeypatch):
-    monkeypatch.setattr("pipeline.stages.assess.get_provider", lambda name: FakeProvider(RESP))
+    _patch_provider(monkeypatch, RESP)
     d = load_domain("ai-tools")
-    insert_candidate(
-        {
-            "domain_id": d.id,
-            "date": "2026-08-15",
-            "source": "aihot",
-            "source_item_id": "test-1",
-            "title": "GLM-5.3 发布",
-            "summary": "编程能力开源第一",
-            "category": "ai-models",
-            "source_score": 82,
-            "reason": "值得关注",
-            "url": "https://example.com",
-            "created_at": "2026-08-15T08:00:00+08:00",
-        }
-    )
+    _insert(d, "test-1")
     kept = run_assess(d, "2026-08-15")
     assert len(kept) == 1
     assert kept[0]["assess"]["total"] == 7.4
@@ -40,22 +48,24 @@ def test_assess_worth_discussing(tmp_db, monkeypatch):
 
 def test_assess_blocked(tmp_db, monkeypatch):
     blocked = {**RESP, "verdict": "blocked", "total": 0.0}
-    monkeypatch.setattr("pipeline.stages.assess.get_provider", lambda name: FakeProvider(blocked))
+    _patch_provider(monkeypatch, blocked)
     d = load_domain("ai-tools")
-    insert_candidate(
-        {
-            "domain_id": d.id,
-            "date": "2026-08-15",
-            "source": "aihot",
-            "source_item_id": "test-2",
-            "title": "某医疗 AI 事件",
-            "summary": "",
-            "category": "health",
-            "source_score": 90,
-            "reason": "",
-            "url": "",
-            "created_at": "2026-08-15T08:00:00+08:00",
-        }
-    )
+    _insert(d, "test-2", title="某医疗 AI 事件", category="health")
     kept = run_assess(d, "2026-08-15")
     assert kept == []
+
+
+def test_assess_below_min_score_dropped(tmp_db, monkeypatch):
+    low = {**RESP, "total": 5.0}  # ai-tools min_score=6.0
+    _patch_provider(monkeypatch, low)
+    d = load_domain("ai-tools")
+    _insert(d, "test-3")
+    assert run_assess(d, "2026-08-15") == []
+
+
+def test_assess_high_risk_dropped(tmp_db, monkeypatch):
+    risky = {**RESP, "dimensions": {**RESP["dimensions"], "risk": 2}}  # risk_max_for_keep=1
+    _patch_provider(monkeypatch, risky)
+    d = load_domain("ai-tools")
+    _insert(d, "test-4")
+    assert run_assess(d, "2026-08-15") == []

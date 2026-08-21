@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from .config import DATA_DIR
@@ -273,6 +273,18 @@ def start_run(domain_id: str, date: str) -> int:
             (domain_id, date, "collect", now_iso()),
         )
         return int(cur.lastrowid)
+
+
+def sweep_stale_runs(max_age_hours: float = 6.0) -> int:
+    """把超过 max_age_hours 仍处于 running 的 run 标记为 failed（进程被杀/断电等场景）。"""
+    cutoff = (datetime.now().astimezone() - timedelta(hours=max_age_hours)).isoformat(timespec="seconds")
+    log = f"运行超时（超过 {max_age_hours:g} 小时），判定为中断"
+    with get_conn() as conn:
+        cur = conn.execute(
+            "UPDATE runs SET status='failed', log=?, finished_at=? WHERE status='running' AND started_at < ?",
+            (log, now_iso(), cutoff),
+        )
+        return cur.rowcount
 
 
 def finish_run(run_id: int, status: str, stage: str = "", log: str = "") -> None:

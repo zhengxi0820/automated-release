@@ -9,7 +9,7 @@ from ..llm import get_provider
 
 
 def run_cardify(domain: DomainConfig, body: dict) -> list[dict]:
-    provider = get_provider(domain.provider)
+    provider = get_provider(domain.provider, domain.model)
     tpl = (PROMPTS_DIR / "cardify.md").read_text(encoding="utf-8")
     lo, hi = domain.card_count
     prompt = (

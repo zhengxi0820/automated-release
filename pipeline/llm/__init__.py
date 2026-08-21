@@ -3,8 +3,8 @@ from .deepseek import DeepSeekProvider
 PROVIDER_REGISTRY = {"deepseek": DeepSeekProvider}
 
 
-def get_provider(name: str):
+def get_provider(name: str, model: str | None = None):
     cls = PROVIDER_REGISTRY.get(name)
     if cls is None:
         raise KeyError(f"未知模型提供商: {name}")
-    return cls()
+    return cls(model) if model else cls()
