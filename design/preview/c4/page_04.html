@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B; --blue: #0066CC;
+  --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--serif); background: #FFFFFF; color: var(--ink);
+  display: flex; flex-direction: column;
+  padding: 90px 130px 50px;
+}
+main { flex: 1; }
+.hln { font-size: 40px; line-height: 60px; font-weight: 500; }
+.pln { font-size: 30px; line-height: 45px; font-weight: 400; text-align: justify; text-align-last: justify; }
+.pln.last { text-align-last: auto; }
+.pageno {
+  position: absolute; right: 130px; bottom: 18px;
+  font-size: 22px; color: var(--ink-3); font-weight: 400; letter-spacing: .12em;
+}
+</style>
+</head>
+<body>
+<main>
+<div class="pln">再往深处想一层：上下文变长，改变的不只是「能读多少」，</div>
+<div class="pln">还有提问的方式。以前提问，要先把问题拆碎，迁就窗口的大</div>
+<div class="pln">小；现在提问，可以把整份材料当背景，直接问结论。工具的</div>
+<div class="pln">边界往后退，人的思考就可以往前站。这才是这类参数升级里</div>
+<div class="pln last">，对普通人最有价值的部分。</div>
+<div style="height:45px"></div>
+<div class="pln">多说一句「一本书」的直觉：人读一本书是线性地读，读完形</div>
+<div class="pln">成整体理解；模型读一本书，更像是把整本书摊开在桌面上，</div>
+<div class="pln">随时抽查任何一页。这两种「读过」不一样——模型的优势是</div>
+<div class="pln">随机访问，劣势是未必有整体感。所以长上下文要配好问题，</div>
+<div class="pln last">你得知道自己要抽哪一页。</div>
+<div style="height:45px"></div>
+<div class="pln">当然，也别把「塞得进」当成「读得懂」。文本进窗口只是第</div>
+<div class="pln">一步，理解、关联、推理是另一回事。就像图书馆进了新书，</div>
+<div class="pln">书架够大是好事，但能不能找到、能不能读懂，还得看检索的</div>
+<div class="pln last">人。这个比喻糙了点，方向没错。</div>
+<div style="height:45px"></div>
+<div class="pln">但这里要泼一盆冷水。上下文长，不等于长文中间的内容都能</div>
+<div class="pln">被准确利用。业内一直有「中间遗忘」的说法：模型对开头和</div>
+<div class="pln">结尾记得牢，中段容易糊。V4 Pro 有没有这个问题，长输入</div>
+<div class="pln last">的响应速度怎么样，参数表上看不出来，只能等实测。</div>
+<div style="height:45px"></div>
+<div class="pln">所以我的判断是：长文档场景可以立刻受益，值得马上试；其</div>
+<div class="pln">他场景先别激动，等第一批深度评测出来再说。工具是用来解</div>
+<div class="pln last">决问题的，不是用来追新的。</div>
+<div style="height:45px"></div>
+</main>
+<div class="pageno">4 / 8</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B; --blue: #0066CC;
+  --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--serif); background: #FFFFFF; color: var(--ink);
+  display: flex; flex-direction: column;
+  padding: 90px 130px 50px;
+}
+main { flex: 1; }
+.hln { font-size: 40px; line-height: 60px; font-weight: 500; }
+.pln { font-size: 30px; line-height: 45px; font-weight: 400; text-align: justify; text-align-last: justify; }
+.pln.last { text-align-last: auto; }
+.pageno {
+  position: absolute; right: 130px; bottom: 18px;
+  font-size: 22px; color: var(--ink-3); font-weight: 400; letter-spacing: .12em;
+}
+</style>
+</head>
+<body>
+<main>
+<div class="pln">要说明的是：截至发稿，官方还没有确认发布时间和定价，以</div>
+<div class="pln">上信息以硅基流动平台页面为准。最后交代本文的信息源：平</div>
+<div class="pln">台页面、社区讨论，加上我自己的使用经验。凡是没核实的地</div>
+<div class="pln">方，文中都标了「未官宣」「待实测」。这不是免责声明，是</div>
+<div class="pln last">阅读习惯——看 AI 资讯，先看信源，再看结论。</div>
+<div style="height:45px"></div>
+<div class="hln">二、1M 上下文是一本书的量</div>
+<div style="height:45px"></div>
+<div class="pln">把 1M 拆到具体场景里看。写论文的同学，参考文献加正文加</div>
+<div class="pln">笔记，往往几十万字起步；看合同的人，一个项目的合同组加</div>
+<div class="pln">上补充协议，轻松过百页；写代码的人，一个中型仓库的源码</div>
+<div class="pln">加文档，也是几十万字符的量级。这些活儿，以前都得先切块</div>
+<div class="pln last">。</div>
+<div style="height:45px"></div>
+<div class="pln">还有一个容易被忽略的隐性收益：上下文越长，对话里沉淀下</div>
+<div class="pln">来的偏好、术语表、风格示例，就越不用每次重复贴。对每天</div>
+<div class="pln">做重复性工作的人来说，这是实打实的提速，比跑分好看多了</div>
+<div class="pln last">。</div>
+<div style="height:45px"></div>
+<div class="pln">顺带澄清一个常见误解：上下文窗口是「单场对话」的记忆，</div>
+<div class="pln">不是永久记忆。对话一关，这些内容不会自动变成模型的常识</div>
+<div class="pln">。想让模型长期记住你的偏好，得靠外部笔记，或者每次重新</div>
+<div class="pln last">喂。搞清楚这一点，能省掉很多不切实际的期待。</div>
+<div style="height:45px"></div>
+</main>
+<div class="pageno">3 / 8</div>
+</body>
+</html>

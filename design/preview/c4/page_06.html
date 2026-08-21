@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B; --blue: #0066CC;
+  --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--serif); background: #FFFFFF; color: var(--ink);
+  display: flex; flex-direction: column;
+  padding: 90px 130px 50px;
+}
+main { flex: 1; }
+.hln { font-size: 40px; line-height: 60px; font-weight: 500; }
+.pln { font-size: 30px; line-height: 45px; font-weight: 400; text-align: justify; text-align-last: justify; }
+.pln.last { text-align-last: auto; }
+.pageno {
+  position: absolute; right: 130px; bottom: 18px;
+  font-size: 22px; color: var(--ink-3); font-weight: 400; letter-spacing: .12em;
+}
+</style>
+</head>
+<body>
+<main>
+<div class="pln">照例说明：我还没有对 V4 Pro 做过实测，以上是基于参数的</div>
+<div class="pln">推断。周末跑完测试，我会回来更新结论，错了认错。也给自</div>
+<div class="pln">己留个后手：任何模型处理长文档，都建议先做一次「复读机</div>
+<div class="pln">测试」——挑材料中间的一段细节直接问它，看答不答得上来</div>
+<div class="pln">。十秒钟的测试，能拦住大部分「看起来读了其实没读」的坑</div>
+<div class="pln last">。</div>
+<div style="height:45px"></div>
+<div class="hln">四、三个要冷静看待的问题</div>
+<div style="height:45px"></div>
+<div class="pln">第一是稳定性。新模型刚上线，并发能力、限流策略、服务优</div>
+<div class="pln">先级都是未知数。把核心工作流押上去，一旦平台侧抖动，耽</div>
+<div class="pln last">误的是自己的事。灰度期观望，不是胆小，是纪律。</div>
+<div style="height:45px"></div>
+<div class="pln">第二是成本。长上下文按输入量计费是行业常态，1M 全喂满</div>
+<div class="pln">，账单未必比想象中友好。尝鲜的时候，建议先看一眼定价页</div>
+<div class="pln last">，再用小文件试水，别一上来就整本教材往里灌。</div>
+<div style="height:45px"></div>
+<div class="pln">第三是生态。围绕旧模型的客户端、工作流、提示词库，要不</div>
+<div class="pln">要跟进适配，迁移的隐性成本要算总账。参数翻十倍，不等于</div>
+<div class="pln last">你的整套流程收益翻十倍，中间隔着工具链的磨合。</div>
+<div style="height:45px"></div>
+<div class="pln">另外给重度用户提个醒：如果你的工具链里已经有围绕旧模型</div>
+<div class="pln">调好的提示词和参数，别急着全套照搬。长上下文下，提示词</div>
+<div class="pln">的位置、示例的排布，都可能影响效果，值得重新做一轮小规</div>
+<div class="pln last">模对比。</div>
+<div style="height:45px"></div>
+</main>
+<div class="pageno">6 / 8</div>
+</body>
+</html>

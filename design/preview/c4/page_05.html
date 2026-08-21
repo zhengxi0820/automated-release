@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B; --blue: #0066CC;
+  --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--serif); background: #FFFFFF; color: var(--ink);
+  display: flex; flex-direction: column;
+  padding: 90px 130px 50px;
+}
+main { flex: 1; }
+.hln { font-size: 40px; line-height: 60px; font-weight: 500; }
+.pln { font-size: 30px; line-height: 45px; font-weight: 400; text-align: justify; text-align-last: justify; }
+.pln.last { text-align-last: auto; }
+.pageno {
+  position: absolute; right: 130px; bottom: 18px;
+  font-size: 22px; color: var(--ink-3); font-weight: 400; letter-spacing: .12em;
+}
+</style>
+</head>
+<body>
+<main>
+<div class="hln">三、500 页 PDF 的真实痛感</div>
+<div style="height:45px"></div>
+<div class="pln">说个我自己的场景。之前处理一份五百页的行业 PDF，模型每</div>
+<div class="pln">轮只能吃进去几十页，我只好手动切成十几段，一段一段喂。</div>
+<div class="pln">更麻烦的是，还得自己维护一份「前面聊过什么」的摘要，每</div>
+<div class="pln last">次都附在提问后面，流程又慢又容易出错。</div>
+<div style="height:45px"></div>
+<div class="pln">当时的流程大致是这样：先把 PDF 按章节切块、编号；每次</div>
+<div class="pln">提问，附上问题相关的两三块，再贴一段滚动摘要；模型答完</div>
+<div class="pln">，手动把新结论补回摘要。一次完整的追问，来回要折腾半小</div>
+<div class="pln last">时，精力全花在「喂」上，而不是「想」上。</div>
+<div style="height:45px"></div>
+<div class="pln">最气人的是，很多结论偏偏藏在对照里。第 12 页的一个数字</div>
+<div class="pln">，要对上第 300 页的一句表述，切块喂的时候，这两段根本</div>
+<div class="pln last">不在同一个对话里，模型想帮也对不上。</div>
+<div style="height:45px"></div>
+<div class="pln">有人会说，用检索也能解决长文档问题，何必非要长上下文。</div>
+<div class="pln">我的体感是：检索适合「答案就在某几段」的点到点问题；长</div>
+<div class="pln">上下文适合「答案散落全文」的汇总型问题。两个能力是互补</div>
+<div class="pln last">的，不是替代关系。这次更新，补的是后一块的短板。</div>
+<div style="height:45px"></div>
+<div class="pln">如果 V4 Pro 的 1M 上下文真的稳定，这类活儿的做法就变成</div>
+<div class="pln">了：整份文件直接扔进去，让它自己从头读到尾，再回答问题</div>
+<div class="pln">。省掉的不只是切割的时间，还有分段导致的信息丢失——这</div>
+<div class="pln last">部分损失平时看不见，出错的时候才知道疼。</div>
+<div style="height:45px"></div>
+</main>
+<div class="pageno">5 / 8</div>
+</body>
+</html>

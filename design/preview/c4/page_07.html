@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B; --blue: #0066CC;
+  --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--serif); background: #FFFFFF; color: var(--ink);
+  display: flex; flex-direction: column;
+  padding: 90px 130px 50px;
+}
+main { flex: 1; }
+.hln { font-size: 40px; line-height: 60px; font-weight: 500; }
+.pln { font-size: 30px; line-height: 45px; font-weight: 400; text-align: justify; text-align-last: justify; }
+.pln.last { text-align-last: auto; }
+.pageno {
+  position: absolute; right: 130px; bottom: 18px;
+  font-size: 22px; color: var(--ink-3); font-weight: 400; letter-spacing: .12em;
+}
+</style>
+</head>
+<body>
+<main>
+<div class="pln">还有一个信号可以参考：第三方平台给的限流参数。如果平台</div>
+<div class="pln">对长上下文请求给出很低的并发额度，说明服务方自己也清楚</div>
+<div class="pln">算力吃紧；反之则说明准备充分。这个细节，比宣传稿诚实得</div>
+<div class="pln last">多。</div>
+<div style="height:45px"></div>
+<div class="pln">如果一定要排个优先级：个人尝鲜，随时可以；辅助性场景，</div>
+<div class="pln">等第一批评测；核心生产流程，等官方公告加价格齐了再说。</div>
+<div class="pln last">越靠近饭碗，越要慢半拍。</div>
+<div style="height:45px"></div>
+<div class="hln">五、普通人的行动清单</div>
+<div style="height:45px"></div>
+<div class="pln">想尝鲜的，去硅基流动把玩一下，完全没问题，这是了解新模</div>
+<div class="pln">型最便宜的方式。但核心工作流别急着迁移。新模型上线初期</div>
+<div class="pln">，稳定性、并发、价格都在变，把吃饭的家伙押上去，赌注太</div>
+<div class="pln last">大。</div>
+<div style="height:45px"></div>
+<div class="pln">稳妥的路径是：挑一个不重要的小项目，用新模型完整跑一遍</div>
+<div class="pln">，和旧模型的输出质量、花费、耗时放在一张表里对比。跑通</div>
+<div class="pln last">了，满意了，再谈迁移。这件事，永远让证据说话。</div>
+<div style="height:45px"></div>
+<div class="pln">接下来盯三个信号就够了：官方正式公告、第一批深度评测、</div>
+<div class="pln">定价页的最终数字。三个都落地之前，一切激动都打折。这几</div>
+<div class="pln">年的规律大同小异：平台先出实例，社区先狂欢，实测来修正</div>
+<div class="pln">，最后价格落地、归于平静。与其第一天抢热搜，不如第一周</div>
+<div class="pln last">看评测。</div>
+<div style="height:45px"></div>
+</main>
+<div class="pageno">7 / 8</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B; --blue: #0066CC;
+  --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--serif); background: #FFFFFF; color: var(--ink);
+  display: flex; flex-direction: column;
+  padding: 90px 130px 50px;
+}
+main { flex: 1; }
+.hln { font-size: 40px; line-height: 60px; font-weight: 500; }
+.pln { font-size: 30px; line-height: 45px; font-weight: 400; text-align: justify; text-align-last: justify; }
+.pln.last { text-align-last: auto; }
+.pageno {
+  position: absolute; right: 130px; bottom: 18px;
+  font-size: 22px; color: var(--ink-3); font-weight: 400; letter-spacing: .12em;
+}
+</style>
+</head>
+<body>
+<main>
+<div class="pln">DeepSeek V4 Pro 已经悄悄出现在硅基流动的模型列表里，</div>
+<div class="pln">普通注册用户就能直接调用，不需要申请，也不需要排队。这</div>
+<div class="pln">次更新最扎眼的参数只有一个：上下文窗口 1M 字符。没有发</div>
+<div class="pln last">布会，没有倒计时，就这么静悄悄地上线了。</div>
+<div style="height:45px"></div>
+<div class="pln">先说人话。上下文窗口，决定的是模型一次对话里能「捧着读</div>
+<div class="pln">」的内容总量。之前的公开主流水平，大致在十几万到二十几</div>
+<div class="pln">万字符这个档位。资料超过这个量，要么截断扔掉一部分，要</div>
+<div class="pln last">么让模型先做一次有损压缩，细节就在这一步悄悄丢掉了。</div>
+<div style="height:45px"></div>
+<div class="pln">1M 字符是什么概念？一部长篇小说的体量，或者二十份上下</div>
+<div class="pln">的年度报告。换句话说，多数人电脑里那个「资料文件夹」，</div>
+<div class="pln last">从此有机会一次性装进同一场对话。</div>
+<div style="height:45px"></div>
+<div class="pln">顺带交代背景：硅基流动是第三方推理平台，聚合托管了多家</div>
+<div class="pln">的开源模型，新模型先在这类平台出现、官方渠道后发，在开</div>
+<div class="pln">源圈是常见路径。看到「已上线」三个字，先别急着当成官宣</div>
+<div class="pln last">，这是这两年用真金白银换来的经验。</div>
+<div style="height:45px"></div>
+<div class="pln">还有个小细节值得玩味：这次上架没配任何宣传物料，模型介</div>
+<div class="pln">绍页都还很简陋。要么是准备不足，要么是故意低调让社区自</div>
+<div class="pln last">己发酵。无论哪种，都说明现在下任何结论都太早。</div>
+<div style="height:45px"></div>
+<div class="pln">要说明的是：截至发稿，官方还没有确认发布时间和定价，以</div>
+<div class="pln">上信息以硅基流动平台页面为准。最后交代本文的信息源：平</div>
+<div class="pln">台页面、社区讨论，加上我自己的使用经验。凡是没核实的地</div>
+<div class="pln">方，文中都标了「未官宣」「待实测」。这不是免责声明，是</div>
+<div class="pln last">阅读习惯——看 AI 资讯，先看信源，再看结论。</div>
+</main>
+<div class="pageno">1 / 1</div>
+</body>
+</html>
