@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@250;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-elevated: #FBFBFD; --bg-gray: #F5F5F7; --bg-white: #FFFFFF; --bg-dark: #1D1D1F;
+  --text-primary: #1D1D1F; --text-secondary: #6E6E73; --text-tertiary: #86868B;
+  --blue: #0066CC; --blue-bright: #2997FF; --cyan: #5AC8FA; --hairline: #D2D2D7;
+  --font: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body { font-family: var(--font); }
+
+body {
+  background: var(--bg-white); color: var(--text-primary);
+  display: flex; flex-direction: column; padding: 88px 96px 76px; position: relative;
+}
+.index {
+  position: absolute; top: 60px; right: 76px; font-size: 300px; font-weight: 250;
+  color: #F5F5F7; line-height: 1; letter-spacing: -.02em; user-select: none;
+}
+.spine {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  writing-mode: vertical-rl; font-size: 25px; letter-spacing: .5em;
+  color: var(--text-tertiary); font-weight: 500;
+}
+.rule { height: 2px; background: var(--text-primary); }
+main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.vol { font-size: 27px; color: var(--text-secondary); letter-spacing: .14em; font-weight: 600; }
+.vol b { font-weight: 800; }
+.title { margin-top: 40px; font-size: 96px; line-height: 1.18; font-weight: 900; letter-spacing: .03em; }
+.sub { margin-top: 40px; font-size: 33px; color: var(--text-secondary); line-height: 1.5; }
+.text { margin-top: 36px; font-size: 42px; line-height: 1.66; font-weight: 400; color: var(--text-primary); }
+.text b { font-weight: 800; background: linear-gradient(transparent 68%, rgba(0,102,204,.16) 0); }
+footer { margin-top: 40px; }
+.foot-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 26px; }
+.tag { font-size: 26px; color: var(--blue); font-weight: 600; }
+.page { font-size: 30px; color: var(--text-tertiary); font-weight: 600; letter-spacing: .08em; }
+</style>
+</head>
+<body>
+
+<div class="index">02</div>
+<span class="spine">AI 工具观察</span>
+<header><div class="rule"></div></header>
+<main>
+    <p class="vol"><b style="color:#0066CC">事实</b> · AI 工具观察</p>
+    <p class="text">硅基流动已上线 DeepSeek V4 Pro，<b>上下文 1M 字符</b>，具体时间和价格未官宣。</p></main>
+<footer>
+  <div class="rule"></div>
+  <div class="foot-row"><span class="tag">#AI工具</span><span class="page">02 — 04</span></div>
+</footer>
+</body>
+</html>

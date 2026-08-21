@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@250;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-elevated: #FBFBFD; --bg-gray: #F5F5F7; --bg-white: #FFFFFF; --bg-dark: #1D1D1F;
+  --text-primary: #1D1D1F; --text-secondary: #6E6E73; --text-tertiary: #86868B;
+  --blue: #0066CC; --blue-bright: #2997FF; --cyan: #5AC8FA; --hairline: #D2D2D7;
+  --font: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body { font-family: var(--font); }
+
+body {
+  background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-gray) 100%);
+  color: var(--text-primary);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 72px 84px 64px; position: relative;
+}
+.ring { position: absolute; border-radius: 50%; border: 2px solid rgba(0,102,204,.07); }
+.r1 { width: 560px; height: 560px; top: -180px; right: -160px; }
+.r2 { width: 340px; height: 340px; top: 90px; right: -60px; border-color: rgba(0,102,204,.05); }
+header { display: flex; justify-content: space-between; align-items: center; position: relative; }
+.brand { font-size: 26px; font-weight: 700; letter-spacing: .04em; }
+.date { font-size: 24px; color: var(--text-tertiary); font-weight: 500; letter-spacing: .06em; }
+main { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; }
+.chip {
+  display: inline-flex; align-self: flex-start; padding: 12px 28px;
+  border-radius: 980px; font-size: 25px; font-weight: 700; letter-spacing: .08em;
+  color: var(--blue); background: rgba(0,102,204,.09);
+}
+.title {
+  margin-top: 44px; font-size: 92px; line-height: 1.16; font-weight: 900;
+  letter-spacing: .04em;
+}
+.sub { margin-top: 36px; font-size: 33px; color: var(--text-secondary); line-height: 1.5; }
+.text { margin-top: 40px; font-size: 42px; line-height: 1.62; font-weight: 500; letter-spacing: .01em; }
+.text b { font-weight: 800; color: var(--blue); }
+footer { display: flex; justify-content: space-between; align-items: center; }
+.dots { display: flex; gap: 14px; }
+.dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,.12); }
+.dot.on { background: var(--blue); width: 34px; border-radius: 980px; }
+.tag { font-size: 25px; color: var(--blue); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="ring r1"></div><div class="ring r2"></div>
+<header><span class="brand">AI 工具观察</span><span class="date">08.21</span></header>
+<main>
+    <div class="chip" style="color:#2D8C3C;background:#2D8C3C14">启示</div>
+    <p class="text">想尝鲜可去硅基流动，但别急着迁移核心任务，<b>先小项目试水</b>。</p></main>
+<footer><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot on"></span></div><span class="tag">#AI工具</span></footer>
+</body>
+</html>
