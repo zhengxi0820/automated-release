@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B;
+  --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--serif); background: #FFFFFF; color: var(--ink);
+  display: flex; flex-direction: column;
+  padding: 92px 78px 64px;
+}
+main { flex: 1; }
+.hln { font-size: 50px; line-height: 80px; font-weight: 800; }
+.pln { font-size: 42px; line-height: 74px; font-weight: 600; text-align: justify; text-align-last: justify; }
+.pln.last { text-align-last: auto; }
+.lede { font-size: 30px; color: #6E6E73; letter-spacing: .12em; font-weight: 400; margin-bottom: 40px; }
+.cover-title { font-size: 84px; line-height: 1.34; font-weight: 900; letter-spacing: .02em; }
+.cover-title u { text-decoration: none; border-bottom: 14px solid var(--hl-yellow); padding-bottom: 8px; }
+.toc { margin-top: 70px; }
+.toc-item { display: flex; align-items: baseline; gap: 26px; padding: 26px 0; border-top: 1.5px solid var(--hairline); }
+.toc-item:first-child { border-top: none; }
+.toc-item .no { font-size: 42px; font-weight: 700; color: var(--ink); }
+.toc-item .what { font-size: 40px; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+<div class="hln">一、上线硅基流动，上下文 1M</div>
+<div style="height:37px"></div>
+<div class="pln">DeepSeek V4 Pro 已经悄悄出现在硅基流动的模</div>
+<div class="pln">型列表里，普通注册用户就能直接调用，不需要申</div>
+<div class="pln">请，也不需要排队。这次更新最扎眼的参数只有一</div>
+<div class="pln">个：上下文窗口 1M 字符。没有发布会，没有倒计</div>
+<div class="pln last">时，就这么静悄悄地上线了。</div>
+<div style="height:29px"></div>
+<div class="pln">先说人话。上下文窗口，决定的是模型一次对话里</div>
+<div class="pln">能「捧着读」的内容总量。之前的公开主流水平，</div>
+<div class="pln">大致在十几万到二十几万字符这个档位。资料超过</div>
+<div class="pln">这个量，要么截断扔掉一部分，要么让模型先做一</div>
+<div class="pln last">次有损压缩，细节就在这一步悄悄丢掉了。</div>
+<div style="height:29px"></div>
+<div class="pln">1M 字符是什么概念？一部长篇小说的体量，或者</div>
+<div class="pln">二十份上下的年度报告。换句话说，多数人电脑里</div>
+<div class="pln">那个「资料文件夹」，从此有机会一次性装进同一</div>
+<div class="pln last">场对话。</div>
+<div style="height:29px"></div>
+</main>
+</body>
+</html>

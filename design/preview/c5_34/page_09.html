@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B;
+  --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1440px; overflow: hidden; }
+body {
+  font-family: var(--serif); background: #FFFFFF; color: var(--ink);
+  display: flex; flex-direction: column;
+  padding: 92px 78px 64px;
+}
+main { flex: 1; }
+.hln { font-size: 50px; line-height: 80px; font-weight: 800; }
+.pln { font-size: 42px; line-height: 74px; font-weight: 600; text-align: justify; text-align-last: justify; }
+.pln.last { text-align-last: auto; }
+.lede { font-size: 30px; color: #6E6E73; letter-spacing: .12em; font-weight: 400; margin-bottom: 40px; }
+.cover-title { font-size: 84px; line-height: 1.34; font-weight: 900; letter-spacing: .02em; }
+.cover-title u { text-decoration: none; border-bottom: 14px solid var(--hl-yellow); padding-bottom: 8px; }
+.toc { margin-top: 70px; }
+.toc-item { display: flex; align-items: baseline; gap: 26px; padding: 26px 0; border-top: 1.5px solid var(--hairline); }
+.toc-item:first-child { border-top: none; }
+.toc-item .no { font-size: 42px; font-weight: 700; color: var(--ink); }
+.toc-item .what { font-size: 40px; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+<div class="pln">照例说明：我还没有对 V4 Pro 做过实测，以上是</div>
+<div class="pln">基于参数的推断。周末跑完测试，我会回来更新结</div>
+<div class="pln">论，错了认错。也给自己留个后手：任何模型处理</div>
+<div class="pln">长文档，都建议先做一次「复读机测试」——挑材</div>
+<div class="pln">料中间的一段细节直接问它，看答不答得上来。十</div>
+<div class="pln">秒钟的测试，能拦住大部分「看起来读了其实没</div>
+<div class="pln last">读」的坑。</div>
+<div style="height:74px"></div>
+<div class="hln">四、三个要冷静看待的问题</div>
+<div style="height:37px"></div>
+<div class="pln">第一是稳定性。新模型刚上线，并发能力、限流策</div>
+<div class="pln">略、服务优先级都是未知数。把核心工作流押上</div>
+<div class="pln">去，一旦平台侧抖动，耽误的是自己的事。灰度期</div>
+<div class="pln last">观望，不是胆小，是纪律。</div>
+<div style="height:29px"></div>
+</main>
+</body>
+</html>

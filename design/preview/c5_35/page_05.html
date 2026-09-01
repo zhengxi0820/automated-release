@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B;
+  --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1800px; overflow: hidden; }
+body {
+  font-family: var(--serif); background: #FFFFFF; color: var(--ink);
+  display: flex; flex-direction: column;
+  padding: 92px 78px 64px;
+}
+main { flex: 1; }
+.hln { font-size: 50px; line-height: 80px; font-weight: 800; }
+.pln { font-size: 42px; line-height: 74px; font-weight: 600; text-align: justify; text-align-last: justify; }
+.pln.last { text-align-last: auto; }
+.lede { font-size: 30px; color: #6E6E73; letter-spacing: .12em; font-weight: 400; margin-bottom: 40px; }
+.cover-title { font-size: 84px; line-height: 1.34; font-weight: 900; letter-spacing: .02em; }
+.cover-title u { text-decoration: none; border-bottom: 14px solid var(--hl-yellow); padding-bottom: 8px; }
+.toc { margin-top: 70px; }
+.toc-item { display: flex; align-items: baseline; gap: 26px; padding: 26px 0; border-top: 1.5px solid var(--hairline); }
+.toc-item:first-child { border-top: none; }
+.toc-item .no { font-size: 42px; font-weight: 700; color: var(--ink); }
+.toc-item .what { font-size: 40px; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+<div style="height:29px"></div>
+<div class="pln">当然，也别把「塞得进」当成「读得懂」。文本进</div>
+<div class="pln">窗口只是第一步，理解、关联、推理是另一回事。</div>
+<div class="pln">就像图书馆进了新书，书架够大是好事，但能不能</div>
+<div class="pln">找到、能不能读懂，还得看检索的人。这个比喻糙</div>
+<div class="pln last">了点，方向没错。</div>
+<div style="height:29px"></div>
+<div class="pln">但这里要泼一盆冷水。上下文长，不等于长文中间</div>
+<div class="pln">的内容都能被准确利用。业内一直有「中间遗忘」</div>
+<div class="pln">的说法：模型对开头和结尾记得牢，中段容易糊。</div>
+<div class="pln">V4 Pro 有没有这个问题，长输入的响应速度怎么</div>
+<div class="pln last">样，参数表上看不出来，只能等实测。</div>
+<div style="height:29px"></div>
+<div class="pln">所以我的判断是：长文档场景可以立刻受益，值得</div>
+<div class="pln">马上试；其他场景先别激动，等第一批深度评测出</div>
+<div class="pln">来再说。工具是用来解决问题的，不是用来追新</div>
+<div class="pln last">的。</div>
+<div style="height:74px"></div>
+<div class="hln">三、500 页 PDF 的真实痛感</div>
+<div style="height:37px"></div>
+</main>
+</body>
+</html>
