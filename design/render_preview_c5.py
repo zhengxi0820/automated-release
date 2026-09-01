@@ -44,13 +44,16 @@ class Layout:
         self.pad_x = 78
         self.pad_top = 92
         self.pad_bottom = 64
-        self.line_cap = float(int((w - self.pad_x * 2) / self.f_body))   # 22
-        self.head_cap = float(int((w - self.pad_x * 2) / self.f_head))   # 18
+        self.ink = "#000000"      # 纯黑（参考图墨色灰度值 5，#1D1D1F 偏灰发软）
+        self.w_body, self.w_head = 500, 800   # 正文 500：笔画细而立；600 会糊成灰墙
+        self.track = 0.04         # 微字距：字间透光的呼吸感
+        self.line_cap = float(int((w - self.pad_x * 2) / (self.f_body * (1 + self.track))))  # 21
+        self.head_cap = float(int((w - self.pad_x * 2) / (self.f_head * (1 + self.track))))  # 17
         self.content_h = h - self.pad_top - self.pad_bottom
 
     CSS = """
 :root {{
-  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B;
+  --ink: {ink}; --ink-2: #6E6E73; --ink-3: #86868B;
   --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
   --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
 }}
@@ -62,8 +65,8 @@ body {{
   padding: {pt}px {px}px {pb}px;
 }}
 main {{ flex: 1; }}
-.hln {{ font-size: {fh}px; line-height: {lhh}px; font-weight: 800; }}
-.pln {{ font-size: {fb}px; line-height: {lhb}px; font-weight: 600; text-align: justify; text-align-last: justify; }}
+.hln {{ font-size: {fh}px; line-height: {lhh}px; font-weight: {wh}; letter-spacing: {tr}em; }}
+.pln {{ font-size: {fb}px; line-height: {lhb}px; font-weight: {wb}; letter-spacing: {tr}em; text-align: justify; text-align-last: justify; }}
 .pln.last {{ text-align-last: auto; }}
 .lede {{ font-size: 30px; color: #6E6E73; letter-spacing: .12em; font-weight: 400; margin-bottom: 40px; }}
 .cover-title {{ font-size: 84px; line-height: 1.34; font-weight: 900; letter-spacing: .02em; }}
@@ -76,7 +79,7 @@ main {{ flex: 1; }}
 """
 
 
-FORBIDDEN_START = set("，。、；：？！」』）】〉》…—,. ;:?!)]}‰")
+FORBIDDEN_START = set("，。、；：？！」』）】〉》…,.;:?!)]}")
 FORBIDDEN_END = set("（「『【〈《([{“‘")
 
 
@@ -92,20 +95,33 @@ def em_len(ch: str) -> float:
 
 
 def wrap(text: str, cap: float) -> list[str]:
-    """折行 + 避头尾：新行首若是禁则标点，把上一行末字符推下来与它作伴。"""
-    lines, cur, curw = [], "", 0.0
+    """折行 + 避头尾：新行首若是禁则标点，把上一行末字符推下来；
+    推下来的字若仍是标点（如「说。】）则连锁下推；破折号成对不拆行。"""
+    lines: list[str] = []
+    cur, curw = "", 0.0
     for ch in text:
         wch = em_len(ch)
         if cur and curw + wch > cap:
             if ch in FORBIDDEN_START and len(cur) >= 2:
-                pushed = cur[-1]
-                cur = cur[:-1]
-                curw -= em_len(pushed)
-                lines.append(cur)
-                cur, curw = pushed + ch, em_len(pushed) + wch
+                push, k = "", 0
+                while cur and k < 3 and (k == 0 or push[0] in FORBIDDEN_START):
+                    push = cur[-1] + push
+                    cur = cur[:-1]
+                    k += 1
+                if cur:
+                    lines.append(cur)
+                cur, curw = push + ch, sum(em_len(c) for c in push) + wch
+            elif ch == "—" and cur.endswith("—"):
+                lines.append(cur[:-1])
+                cur, curw = "——", 2.0
             else:
-                lines.append(cur)
-                cur, curw = ch, wch
+                if cur[-1] in FORBIDDEN_END:
+                    # 行末不能悬开引号/开括号，推到下一行
+                    lines.append(cur[:-1])
+                    cur, curw = cur[-1] + ch, em_len(cur[-1]) + wch
+                else:
+                    lines.append(cur)
+                    cur, curw = ch, wch
         else:
             cur += ch
             curw += wch
@@ -175,7 +191,8 @@ def page_html(L: Layout, body: str) -> str:
 <meta charset="utf-8">
 {FONTS}
 <style>{L.CSS.format(w=L.w, h=L.h, px=L.pad_x, pt=L.pad_top, pb=L.pad_bottom,
-                      fb=L.f_body, fh=L.f_head, lhb=L.lh_body, lhh=L.lh_head)}</style>
+                      fb=L.f_body, fh=L.f_head, lhb=L.lh_body, lhh=L.lh_head,
+                      ink=L.ink, wb=L.w_body, wh=L.w_head, tr=L.track)}</style>
 </head>
 <body>
 {body}

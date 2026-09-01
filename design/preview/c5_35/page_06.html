@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B;
+  --ink: #000000; --ink-2: #6E6E73; --ink-3: #86868B;
   --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
   --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
 }
@@ -18,8 +18,8 @@ body {
   padding: 92px 78px 64px;
 }
 main { flex: 1; }
-.hln { font-size: 50px; line-height: 80px; font-weight: 800; }
-.pln { font-size: 42px; line-height: 74px; font-weight: 600; text-align: justify; text-align-last: justify; }
+.hln { font-size: 50px; line-height: 80px; font-weight: 800; letter-spacing: 0.04em; }
+.pln { font-size: 42px; line-height: 74px; font-weight: 500; letter-spacing: 0.04em; text-align: justify; text-align-last: justify; }
 .pln.last { text-align-last: auto; }
 .lede { font-size: 30px; color: #6E6E73; letter-spacing: .12em; font-weight: 400; margin-bottom: 40px; }
 .cover-title { font-size: 84px; line-height: 1.34; font-weight: 900; letter-spacing: .02em; }
@@ -33,28 +33,25 @@ main { flex: 1; }
 </head>
 <body>
 <main>
-<div class="pln">说个我自己的场景。之前处理一份五百页的行业 P</div>
-<div class="pln">DF，模型每轮只能吃进去几十页，我只好手动切</div>
-<div class="pln">成十几段，一段一段喂。更麻烦的是，还得自己维</div>
-<div class="pln">护一份「前面聊过什么」的摘要，每次都附在提问</div>
-<div class="pln last">后面，流程又慢又容易出错。</div>
+<div style="height:74px"></div>
+<div class="hln">三、500 页 PDF 的真实痛感</div>
+<div style="height:37px"></div>
+<div class="pln">说个我自己的场景。之前处理一份五百页的行业</div>
+<div class="pln"> PDF，模型每轮只能吃进去几十页，我只好手动</div>
+<div class="pln">切成十几段，一段一段喂。更麻烦的是，还得自</div>
+<div class="pln">己维护一份「前面聊过什么」的摘要，每次都附</div>
+<div class="pln last">在提问后面，流程又慢又容易出错。</div>
 <div style="height:29px"></div>
-<div class="pln">当时的流程大致是这样：先把 PDF 按章节切块、</div>
-<div class="pln">编号；每次提问，附上问题相关的两三块，再贴一</div>
-<div class="pln">段滚动摘要；模型答完，手动把新结论补回摘要。</div>
-<div class="pln">一次完整的追问，来回要折腾半小时，精力全花在</div>
-<div class="pln last">「喂」上，而不是「想」上。</div>
+<div class="pln">当时的流程大致是这样：先把 PDF 按章节切</div>
+<div class="pln">块、编号；每次提问，附上问题相关的两三块，</div>
+<div class="pln">再贴一段滚动摘要；模型答完，手动把新结论补</div>
+<div class="pln">回摘要。一次完整的追问，来回要折腾半小时，</div>
+<div class="pln last">精力全花在「喂」上，而不是「想」上。</div>
 <div style="height:29px"></div>
-<div class="pln">最气人的是，很多结论偏偏藏在对照里。第 12 页</div>
-<div class="pln">的一个数字，要对上第 300 页的一句表述，切块</div>
-<div class="pln">喂的时候，这两段根本不在同一个对话里，模型想</div>
-<div class="pln last">帮也对不上。</div>
-<div style="height:29px"></div>
-<div class="pln">有人会说，用检索也能解决长文档问题，何必非要</div>
-<div class="pln">长上下文。我的体感是：检索适合「答案就在某几</div>
-<div class="pln">段」的点到点问题；长上下文适合「答案散落全</div>
-<div class="pln">文」的汇总型问题。两个能力是互补的，不是替代</div>
-<div class="pln last">关系。这次更新，补的是后一块的短板。</div>
+<div class="pln">最气人的是，很多结论偏偏藏在对照里。第 12 </div>
+<div class="pln">页的一个数字，要对上第 300 页的一句表述，</div>
+<div class="pln">切块喂的时候，这两段根本不在同一个对话里，</div>
+<div class="pln last">模型想帮也对不上。</div>
 <div style="height:29px"></div>
 </main>
 </body>

@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #1D1D1F; --ink-2: #6E6E73; --ink-3: #86868B;
+  --ink: #000000; --ink-2: #6E6E73; --ink-3: #86868B;
   --hairline: #D2D2D7; --hl-yellow: rgba(255,204,0,.40);
   --serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
 }
@@ -18,8 +18,8 @@ body {
   padding: 92px 78px 64px;
 }
 main { flex: 1; }
-.hln { font-size: 50px; line-height: 80px; font-weight: 800; }
-.pln { font-size: 42px; line-height: 74px; font-weight: 600; text-align: justify; text-align-last: justify; }
+.hln { font-size: 50px; line-height: 80px; font-weight: 800; letter-spacing: 0.04em; }
+.pln { font-size: 42px; line-height: 74px; font-weight: 500; letter-spacing: 0.04em; text-align: justify; text-align-last: justify; }
 .pln.last { text-align-last: auto; }
 .lede { font-size: 30px; color: #6E6E73; letter-spacing: .12em; font-weight: 400; margin-bottom: 40px; }
 .cover-title { font-size: 84px; line-height: 1.34; font-weight: 900; letter-spacing: .02em; }
@@ -33,10 +33,16 @@ main { flex: 1; }
 </head>
 <body>
 <main>
-<div class="pln">最后留个问题：你会为了 1M 上下文换模型吗？你</div>
-<div class="pln">手头最想整包塞进去的，又是哪份资料？评论区聊</div>
-<div class="pln">聊，攒够了我就整理一篇「评论区实测合集」，让</div>
-<div class="pln last">后来的人少踩坑。</div>
+<div class="pln">如果你只有两分钟，就记三句话：第一，V4 Pr</div>
+<div class="pln">o 在硅基流动，可以直接试；第二，1M 上下文</div>
+<div class="pln">对长文档是真需求，值得亲自验证；第三，价格</div>
+<div class="pln">和稳定性没落地之前，核心任务别动。其余的，</div>
+<div class="pln last">交给时间。</div>
+<div style="height:29px"></div>
+<div class="pln">最后留个问题：你会为了 1M 上下文换模型吗？</div>
+<div class="pln">你手头最想整包塞进去的，又是哪份资料？评论</div>
+<div class="pln">区聊聊，攒够了我就整理一篇「评论区实测合</div>
+<div class="pln last">集」，让后来的人少踩坑。</div>
 </main>
 </body>
 </html>
