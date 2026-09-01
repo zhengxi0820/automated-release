@@ -90,7 +90,9 @@ def em_len(ch: str) -> float:
             return 0.32
         if ch in ".,:;!?'\"()":
             return 0.36
-        return 0.56
+        if ch in "mwMW":
+            return 0.85
+        return 0.62  # 宋体拉丁小写在 0.55-0.7em 之间，取保守值防溢出
     return 1.0
 
 
