@@ -15,7 +15,7 @@ html, body { width: 1080px; height: 1440px; overflow: hidden; }
 body {
   font-family: var(--serif); background: #FFFFFF; color: var(--ink);
   display: flex; flex-direction: column;
-  padding: 82px 78px 79px;
+  padding: 80px 78px 85px;
 }
 main { flex: 1; }
 .hln { font-size: 50px; line-height: 80px; font-weight: 800; letter-spacing: 0.04em; }
@@ -33,6 +33,11 @@ main { flex: 1; }
 </head>
 <body>
 <main>
+<div class="pln">但这里要泼一盆冷水。上下文长，不等于长文中</div>
+<div class="pln">间的内容都能被准确利用。业内一直有「中间遗</div>
+<div class="pln">忘」的说法：模型对开头和结尾记得牢，中段容</div>
+<div class="pln">易糊。V4 Pro 有没有这个问题，长输入的响应</div>
+<div class="pln last">速度怎么样，参数表上看不出来，只能等实测。</div>
 <div style="height:30px"></div>
 <div class="pln">所以我的判断是：长文档场景可以立刻受益，值</div>
 <div class="pln">得马上试；其他场景先别激动，等第一批深度评</div>
@@ -41,12 +46,6 @@ main { flex: 1; }
 <div style="height:74px"></div>
 <div class="hln">三、500 页 PDF 的真实痛感</div>
 <div style="height:37px"></div>
-<div class="pln">说个我自己的场景。之前处理一份五百页的行业</div>
-<div class="pln"> PDF，模型每轮只能吃进去几十页，我只好手</div>
-<div class="pln">动切成十几段，一段一段喂。更麻烦的是，还得</div>
-<div class="pln">自己维护一份「前面聊过什么」的摘要，每次都</div>
-<div class="pln last">附在提问后面，流程又慢又容易出错。</div>
-<div style="height:30px"></div>
 </main>
 </body>
 </html>

@@ -15,7 +15,7 @@ html, body { width: 1080px; height: 1440px; overflow: hidden; }
 body {
   font-family: var(--serif); background: #FFFFFF; color: var(--ink);
   display: flex; flex-direction: column;
-  padding: 82px 78px 79px;
+  padding: 80px 78px 85px;
 }
 main { flex: 1; }
 .hln { font-size: 50px; line-height: 80px; font-weight: 800; letter-spacing: 0.04em; }
@@ -33,6 +33,12 @@ main { flex: 1; }
 </head>
 <body>
 <main>
+<div class="pln">说个我自己的场景。之前处理一份五百页的行业</div>
+<div class="pln"> PDF，模型每轮只能吃进去几十页，我只好手</div>
+<div class="pln">动切成十几段，一段一段喂。更麻烦的是，还得</div>
+<div class="pln">自己维护一份「前面聊过什么」的摘要，每次都</div>
+<div class="pln last">附在提问后面，流程又慢又容易出错。</div>
+<div style="height:30px"></div>
 <div class="pln">当时的流程大致是这样：先把 PDF 按章节切</div>
 <div class="pln">块、编号；每次提问，附上问题相关的两三块，</div>
 <div class="pln">再贴一段滚动摘要；模型答完，手动把新结论补</div>
@@ -43,12 +49,6 @@ main { flex: 1; }
 <div class="pln">页的一个数字，要对上第 300 页的一句表述，</div>
 <div class="pln">切块喂的时候，这两段根本不在同一个对话里，</div>
 <div class="pln last">模型想帮也对不上。</div>
-<div style="height:30px"></div>
-<div class="pln">有人会说，用检索也能解决长文档问题，何必非</div>
-<div class="pln">要长上下文。我的体感是：检索适合「答案就在</div>
-<div class="pln">某几段」的点到点问题；长上下文适合「答案散</div>
-<div class="pln">落全文」的汇总型问题。两个能力是互补的，不</div>
-<div class="pln last">是替代关系。这次更新，补的是后一块的短板。</div>
 <div style="height:30px"></div>
 </main>
 </body>

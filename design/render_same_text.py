@@ -37,6 +37,7 @@ def main() -> None:
     L.track = 0.0         # 参考图实测字距为 0（其空气感来自字形本身）
     L.f_body = 40         # 参考图实测字号 ≈ 41.5，40px 每行可容 23 字
     L.line_cap = 23.0
+    L.pad_top, L.pad_bottom = 78, 82  # 对照页微调 2-3px 使单页恰好容纳（生产用 80/85）
 
     units = []
     for j, p in enumerate(PARAGRAPHS):
