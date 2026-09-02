@@ -33,9 +33,7 @@ PARAGRAPHS = [
 
 
 def main() -> None:
-    L = m.Layout(1080, 1800)
-    L.lh_body = 76        # 行距 76（用户指定）
-    L.para_gap = 30       # 段距 106 = 76 + 30（用户指定）
+    L = m.Layout(1080, 1800)  # 行距/段距/留白/字重走 Layout 定稿值
     L.track = 0.0         # 参考图实测字距为 0（其空气感来自字形本身）
     L.f_body = 40         # 参考图实测字号 ≈ 41.5，40px 每行可容 23 字
     L.line_cap = 23.0
@@ -61,6 +59,9 @@ def main() -> None:
         f"--screenshot={OUT}", html_path.as_uri(),
     ]
     subprocess.run(cmd, check=True, capture_output=True, timeout=60)
+    from PIL import Image, ImageCms
+    im = Image.open(OUT)
+    im.save(OUT, icc_profile=ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB")).tobytes())
     print(f"输出：{OUT}")
 
 

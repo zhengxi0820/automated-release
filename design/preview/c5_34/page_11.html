@@ -15,11 +15,11 @@ html, body { width: 1080px; height: 1440px; overflow: hidden; }
 body {
   font-family: var(--serif); background: #FFFFFF; color: var(--ink);
   display: flex; flex-direction: column;
-  padding: 92px 78px 64px;
+  padding: 87px 78px 69px;
 }
 main { flex: 1; }
 .hln { font-size: 50px; line-height: 80px; font-weight: 800; letter-spacing: 0.04em; }
-.pln { font-size: 42px; line-height: 74px; font-weight: 500; letter-spacing: 0.04em; text-align: justify; text-align-last: justify; }
+.pln { font-size: 42px; line-height: 76px; font-weight: 600; letter-spacing: 0.04em; text-align: justify; text-align-last: justify; }
 .pln.last { text-align-last: auto; }
 .lede { font-size: 30px; color: #6E6E73; letter-spacing: .12em; font-weight: 400; margin-bottom: 40px; }
 .cover-title { font-size: 84px; line-height: 1.34; font-weight: 900; letter-spacing: .02em; }
@@ -33,23 +33,22 @@ main { flex: 1; }
 </head>
 <body>
 <main>
+<div class="pln">另外给重度用户提个醒：如果你的工具链里已经</div>
+<div class="pln">有围绕旧模型调好的提示词和参数，别急着全套</div>
+<div class="pln">照搬。长上下文下，提示词的位置、示例的排</div>
+<div class="pln">布，都可能影响效果，值得重新做一轮小规模对</div>
+<div class="pln last">比。</div>
+<div style="height:30px"></div>
 <div class="pln">还有一个信号可以参考：第三方平台给的限流参</div>
 <div class="pln">数。如果平台对长上下文请求给出很低的并发额</div>
 <div class="pln">度，说明服务方自己也清楚算力吃紧；反之则说</div>
 <div class="pln last">明准备充分。这个细节，比宣传稿诚实得多。</div>
-<div style="height:29px"></div>
+<div style="height:30px"></div>
 <div class="pln">如果一定要排个优先级：个人尝鲜，随时可以；</div>
 <div class="pln">辅助性场景，等第一批评测；核心生产流程，等</div>
 <div class="pln">官方公告加价格齐了再说。越靠近饭碗，越要慢</div>
 <div class="pln last">半拍。</div>
 <div style="height:74px"></div>
-<div class="hln">五、普通人的行动清单</div>
-<div style="height:37px"></div>
-<div class="pln">想尝鲜的，去硅基流动把玩一下，完全没问题，</div>
-<div class="pln">这是了解新模型最便宜的方式。但核心工作流别</div>
-<div class="pln">急着迁移。新模型上线初期，稳定性、并发、价</div>
-<div class="pln last">格都在变，把吃饭的家伙押上去，赌注太大。</div>
-<div style="height:29px"></div>
 </main>
 </body>
 </html>

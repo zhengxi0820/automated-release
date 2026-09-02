@@ -38,14 +38,14 @@ class Layout:
     def __init__(self, w: int, h: int):
         self.w, self.h = w, h
         self.f_body, self.f_head = 42, 50
-        self.lh_body, self.lh_head = 74, 80
-        self.para_gap = 29        # 段间附加（段落 pitch = 74+29 = 103 ≈ 1.4 倍行距）
+        self.lh_body, self.lh_head = 76, 80   # 行距 76（用户定稿）
+        self.para_gap = 30        # 段距 106 = 76 + 30（用户定稿）
         self.head_before, self.head_after = 74, 37
         self.pad_x = 78
-        self.pad_top = 92
-        self.pad_bottom = 64
+        self.pad_top = 87         # 上留白 87 = 92-5（用户定稿）
+        self.pad_bottom = 69      # 下留白 69 = 64+5（用户定稿）
         self.ink = "#000000"      # 纯黑（参考图墨色灰度值 5，#1D1D1F 偏灰发软）
-        self.w_body, self.w_head = 500, 800   # 正文 500：笔画细而立；600 会糊成灰墙
+        self.w_body, self.w_head = 600, 800   # 正文 600（用户定稿）
         self.track = 0.04         # 微字距：字间透光的呼吸感
         self.line_cap = float(int((w - self.pad_x * 2) / (self.f_body * (1 + self.track))))  # 21
         self.head_cap = float(int((w - self.pad_x * 2) / (self.f_head * (1 + self.track))))  # 17
@@ -257,6 +257,10 @@ def render_version(tag: str, w: int, h: int) -> None:
             f"--screenshot={png_path}", html_path.as_uri(),
         ]
         subprocess.run(cmd, check=True, capture_output=True, timeout=60)
+        # 内嵌 sRGB 配置：防止看图器按显示器配置渲染导致白底偏色
+        from PIL import Image, ImageCms
+        im = Image.open(png_path)
+        im.save(png_path, icc_profile=ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB")).tobytes())
     print(f"[{tag}] {w}x{h}  封面 + {len(pages)} 页正文  (+ prose_mode)")
 
 
