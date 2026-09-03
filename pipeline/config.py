@@ -75,6 +75,40 @@ class DomainConfig:
         w = self.writing
         return int(w.get("card_count_min", 5)), int(w.get("card_count_max", 7))
 
+    # ── 书页式连续排版（cardify.mode = flow）──
+
+    @property
+    def cardify_mode(self) -> str:
+        """flow = 书页连续排版（默认）；legacy = 旧单卡模板。"""
+        return self.data.get("cardify", {}).get("mode", "flow")
+
+    @property
+    def use_headings(self) -> bool:
+        """True = 分节大标题模式；False = 散文模式。"""
+        return bool(self.data.get("cardify", {}).get("use_headings", True))
+
+    @property
+    def section_count(self) -> int:
+        return int(self.data.get("cardify", {}).get("section_count", 5))
+
+    @property
+    def canvas(self) -> tuple[int, int]:
+        c = self.data.get("cardify", {}).get("canvas", {})
+        return int(c.get("width", 1080)), int(c.get("height", 1800))
+
+    @property
+    def flow_layout_overrides(self) -> dict:
+        """领域可覆盖排版参数（键同 render.flow_cards.Layout 字段）。"""
+        return dict(self.data.get("cardify", {}).get("layout", {}))
+
+    @property
+    def writing_min_length(self) -> int:
+        return int(self.writing.get("min_length", 2800))
+
+    @property
+    def max_tokens(self) -> int:
+        return int(self.llm.get("max_tokens", 8192))
+
     @property
     def title_max_chars(self) -> int:
         return int(self.writing.get("title_max_chars", 20))

@@ -16,7 +16,6 @@ from pipeline.stages.research import run_research  # noqa: E402
 from pipeline.stages.steelman import run_steelman  # noqa: E402
 from pipeline.stages.write import run_write  # noqa: E402
 from render.package import build_package  # noqa: E402
-from render.render_cards import render_article  # noqa: E402
 
 
 def pick_best_story(src: AIHOTSource):
@@ -59,19 +58,27 @@ def main() -> None:
     research = run_research(domain, cand)
     steelman = run_steelman(domain, cand, research)
     body = run_write(domain, cand, research, steelman)
-    cards = run_cardify(domain, body)
+    sections = run_cardify(domain, body)
 
     out_root = ROOT / "data" / "output" / "ai-tools" / "demo"
     out_root.mkdir(parents=True, exist_ok=True)
     tags = body.get("tags", [])
-    tag = tags[0] if tags else "#AI工具"
-    pngs = render_article(domain.id, "demo", domain.name, cards, tag)
     todo = [t.get("claim", str(t)) if isinstance(t, dict) else str(t) for t in body.get("todo_verify", [])]
-    zip_path = build_package(domain.id, "demo", body.get("title", ""), body, tags, todo, pngs)
+
+    from render.flow_cards import Layout, article_text, render_flow_pages
+
+    L = Layout(w=domain.canvas[0], h=domain.canvas[1], **domain.flow_layout_overrides)
+    pngs = render_flow_pages(
+        domain.id, "demo", sections,
+        title=body.get("title", ""),
+        layout=L,
+        use_headings=domain.use_headings,
+    )
+    text = article_text(sections, domain.use_headings)
+    zip_path = build_package(domain.id, "demo", body.get("title", ""), text, tags, todo, pngs)
 
     print("标题:", body.get("title"))
-    print("段落数:", len(body.get("body", [])))
-    print("卡片数:", len(cards))
+    print("节数:", len(sections), "（标题模式:", domain.use_headings, "）")
     print("PNG:", [str(p) for p in pngs])
     print("发布包:", zip_path)
 

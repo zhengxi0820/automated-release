@@ -47,15 +47,34 @@ llm:
   provider: deepseek
   model: deepseek-chat
   temperature: 0.6
+  max_tokens: 8192
   budget_monthly: 30
 
 writing:
-  max_length: 800
+  min_length: 2800
+  max_length: 3500
   title_max_chars: 20
   card_count_min: 5
   card_count_max: 7
   tone: apple-clean
   include_tags: ["#AI工具", "#效率工具"]
+
+cardify:
+  mode: flow            # flow = 书页连续排版；legacy = 旧单卡模板
+  use_headings: true    # false = 散文模式（无节标题）
+  section_count: 5      # 期望节数（4-7 之间浮动）
+  canvas:
+    width: 1080
+    height: 1800
+  layout:               # 键对应 render.flow_cards.Layout 字段，缺省用定稿值
+    f_body: 42
+    f_head: 50
+    w_body: 600
+    w_head: 800
+    lh_body: 76
+    para_gap: 30
+    pad_top: 80
+    pad_bottom: 120
 
 compliance:
   block_categories:

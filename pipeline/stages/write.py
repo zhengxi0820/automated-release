@@ -35,9 +35,11 @@ def run_write(domain: DomainConfig, candidate: dict, research: dict, steelman: d
         .replace("{{facts_json}}", json.dumps(research.get("facts", []), ensure_ascii=False))
         .replace("{{todo_verify_json}}", json.dumps(research.get("todo_verify", []), ensure_ascii=False))
         .replace("{{title_max_chars}}", str(domain.title_max_chars))
+        .replace("{{min_length}}", str(domain.writing_min_length))
         .replace("{{max_length}}", str(domain.writing_max_length))
     )
-    result = provider.chat(prompt, system="你是小红书写手，输出 JSON。", temperature=domain.temperature)
+    result = provider.chat(prompt, system="你是小红书写手，输出 JSON。", temperature=domain.temperature,
+                           max_tokens=domain.max_tokens)
     hits = _has_fabricated_experience(result)
     if hits:
         # 违反事实铁律：追加纠错指令重写一次
