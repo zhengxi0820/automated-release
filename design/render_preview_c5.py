@@ -43,7 +43,7 @@ class Layout:
         self.head_before, self.head_after = 74, 37
         self.pad_x = 78
         self.pad_top = 80         # 上留白（用户定稿）
-        self.pad_bottom = 85      # 下留白（用户定稿）
+        self.pad_bottom = 100     # 下留白（用户定稿）
         self.ink = "#000000"      # 纯黑（参考图墨色灰度值 5，#1D1D1F 偏灰发软）
         self.w_body, self.w_head = 600, 800   # 正文 600（用户定稿）
         self.track = 0.04         # 微字距：字间透光的呼吸感
