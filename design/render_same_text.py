@@ -33,11 +33,10 @@ PARAGRAPHS = [
 
 
 def main() -> None:
-    L = m.Layout(1080, 1800)  # 行距/段距/留白/字重走 Layout 定稿值
+    L = m.Layout(1080, 1800)  # 生产参数：上 80 / 下 120，行距 76 / 段距 30
     L.track = 0.0         # 参考图实测字距为 0（其空气感来自字形本身）
-    L.f_body = 40         # 参考图实测字号 ≈ 41.5，40px 每行可容 23 字
+    L.f_body = 40         # 参考图实测字号 ≈ 41.5
     L.line_cap = 23.0
-    L.pad_top, L.pad_bottom = 78, 82  # 对照页微调 2-3px 使单页恰好容纳（生产用 80/85）
 
     units = []
     for j, p in enumerate(PARAGRAPHS):
@@ -45,11 +44,21 @@ def main() -> None:
             units.append({"kind": "gap", "h": L.para_gap})
         units.append({"kind": "p", "lines": m.wrap(p, L.line_cap)})
 
-    total_h = sum(
-        len(u["lines"]) * L.lh_body if u["kind"] == "p" else u["h"] for u in units
-    )
-    print(f"排版高度 {total_h}px / 版心 {L.content_h}px（{'单页可容' if total_h <= L.content_h else '超出一页'}），"
-          f"共 {sum(len(u['lines']) for u in units if u['kind'] == 'p')} 行")
+    # 装不下就舍弃多余的整行（不做半行裁切）
+    def total_h(us):
+        return sum(len(u["lines"]) * L.lh_body if u["kind"] == "p" else u["h"] for u in us)
+
+    dropped = 0
+    while units and total_h(units) > L.content_h:
+        last = units[-1]
+        if last["kind"] != "p" or len(last["lines"]) <= 1:
+            units.pop()
+            if units and units[-1]["kind"] == "gap":
+                units.pop()
+            continue
+        last["lines"].pop()
+        dropped += 1
+    print(f"版心 {L.content_h}px，排版 {total_h(units)}px，舍弃 {dropped} 行")
 
     html = m.page_html(L, m.flow_page_html(L, units).split("<body>")[1].split("</body>")[0])
     html_path = OUT.with_suffix(".html")
