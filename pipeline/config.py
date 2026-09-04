@@ -106,6 +106,15 @@ class DomainConfig:
         return int(self.writing.get("min_length", 2800))
 
     @property
+    def writing_disclaimer(self) -> str:
+        return str(self.writing.get("disclaimer", "") or "")
+
+    @property
+    def content_type(self) -> str:
+        """hotspot = 热点评论（默认）；concept = 概念科普。"""
+        return str(self.data.get("content_type", "hotspot"))
+
+    @property
     def max_tokens(self) -> int:
         return int(self.llm.get("max_tokens", 8192))
 

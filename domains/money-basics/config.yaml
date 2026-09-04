@@ -1,0 +1,45 @@
+id: money-basics
+name: 钱的小白课
+enabled: true
+content_type: concept   # concept = 概念科普（不走热点采集/评估）
+
+sources: []             # 概念模式不从热点采集，选题来自 concepts/money-basics.txt
+
+llm:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.7
+  max_tokens: 8192
+
+writing:
+  min_length: 2600
+  max_length: 3400
+  title_max_chars: 20
+  disclaimer: "本文只做知识科普，不构成任何投资建议。"
+
+cardify:
+  mode: flow
+  use_headings: true
+  section_count: 5
+  canvas:
+    width: 1080
+    height: 1800
+  layout:
+    f_body: 42
+    f_head: 50
+    w_body: 600
+    w_head: 800
+    lh_body: 76
+    para_gap: 30
+    pad_top: 80
+    pad_bottom: 120
+
+compliance:
+  block_categories:
+    - finance-advice
+  block_keywords:
+    - 稳赚
+    - 保本高收益
+    - 带你炒股
+    - 内幕
+  require_ai_label: true

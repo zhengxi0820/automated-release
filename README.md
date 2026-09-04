@@ -4,7 +4,10 @@
 
 - 第一版：本地 Windows 运行，手动发布
 - 多领域共存：流水线逻辑与领域配置分层，`domains/` 下每目录一个领域，可并行运行
-- 文档先行：见 `docs/`（需求、架构、接口）
+- 两种内容类型：
+  - `hotspot`（热点评论）：`ai-tools`——AIHOT 采集热点，评估后成观点文
+  - `concept`（概念科普）：`ai-basics` / `money-basics`——从概念池取题，寓言式讲透一个概念
+- 文档先行：见 `docs/`（需求、架构、接口、卡片排版规范）
 - 回归测试：`tests/`（固定 fixture，防行为漂移）
 
 ## 文档导航
@@ -35,6 +38,19 @@ python scripts/run_daily.py --domain ai-tools --until assess
 # 启动审核界面（手机访问 http://<局域网IP>:8000）
 python -m uvicorn web.app:app --host 0.0.0.0 --port 8000
 ```
+
+## 概念科普（concept 领域）
+
+```bash
+# 从概念池取下一个概念，成文到草稿（编辑里先往 concepts/<domain>.txt 加概念，一行一个）
+python scripts/run_concept.py --domain ai-basics
+python scripts/run_concept.py --domain money-basics
+
+# 指定概念直接讲透，并一路出到发布包
+python scripts/run_concept.py --domain money-basics --concept "复利" --until package
+```
+
+概念文走寓言式五段结构：场景钩子 → 寓言 → 揭示 → 讲透（机制+隐喻对照+误解澄清）→ 克制的延伸。排版与热点文共用同一引擎。
 
 ## 测试
 
