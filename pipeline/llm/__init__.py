@@ -1,6 +1,7 @@
 from .deepseek import DeepSeekProvider
+from .glm import GLMProvider
 
-PROVIDER_REGISTRY = {"deepseek": DeepSeekProvider}
+PROVIDER_REGISTRY = {"deepseek": DeepSeekProvider, "glm": GLMProvider}
 
 
 def get_provider(name: str, model: str | None = None):

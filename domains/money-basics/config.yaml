@@ -6,10 +6,10 @@ content_type: concept   # concept = 概念科普（不走热点采集/评估）
 sources: []             # 概念模式不从热点采集，选题来自 concepts/money-basics.txt
 
 llm:
-  provider: deepseek
-  model: deepseek-chat
+  provider: glm
+  model: glm-5.3-flash   # 备选：glm-4.6（更强推理）/ glm-4-flash（免费）
   temperature: 0.7
-  max_tokens: 8192
+  max_tokens: 32768
 
 writing:
   min_length: 2600

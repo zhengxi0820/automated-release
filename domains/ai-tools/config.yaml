@@ -44,10 +44,10 @@ assess:
   risk_max_for_keep: 1   # risk 维度 >1 直接淘汰
 
 llm:
-  provider: deepseek
-  model: deepseek-chat
+  provider: glm
+  model: glm-5.3-flash   # 备选：glm-4.6（更强推理）/ glm-4-flash（免费）
   temperature: 0.6
-  max_tokens: 8192
+  max_tokens: 32768
   budget_monthly: 30
 
 writing:
