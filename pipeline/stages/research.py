@@ -65,4 +65,5 @@ def run_research(domain: DomainConfig, candidate: dict) -> dict:
         prompt_tpl.replace("{{domain_name}}", domain.name)
         .replace("{{materials}}", "\n\n".join(materials) if materials else "（无额外材料，仅标题：" + candidate.get("title", "") + "）")
     )
-    return provider.chat(prompt, system="你是事实核查编辑，输出 JSON。", temperature=0.2)
+    return provider.chat(prompt, system="你是事实核查编辑，输出 JSON。", temperature=0.2,
+                          max_tokens=domain.max_tokens)

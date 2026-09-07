@@ -1,6 +1,6 @@
 # XHS 热点内容流水线（XHS Hotspot Pipeline）
 
-每日自动跑通「热点采集 → 探讨意义判断 → 人工审核 → 成文 → 手机润色 → 图文卡片 → 发布包」的小红书内容流水线。
+每日自动跑通「热点采集 → 探讨意义判断 → 人工审核 → 调研成文 → 手机润色 → 书页式成图 → 发布包」的小红书内容流水线。
 
 - 第一版：本地 Windows 运行，手动发布
 - 多领域共存：流水线逻辑与领域配置分层，`domains/` 下每目录一个领域，可并行运行
@@ -24,7 +24,9 @@
 # 安装依赖
 python -m pip install -r requirements.txt
 
-# 配置凭据：复制 .env.example 为 .env，填写 DEEPSEEK_API_KEY / PUSHPLUS_TOKEN
+# 配置凭据：复制 .env.example 为 .env
+# 填写 GLM_API_KEY（三领域现行：智谱 glm-5.3-flash）/ PUSHPLUS_TOKEN
+# DEEPSEEK_API_KEY 为备选 provider（domains/<id>/config.yaml 的 llm.provider 切换）
 
 # 初始化数据库与领域注册
 python scripts/init_db.py
@@ -50,7 +52,7 @@ python scripts/run_concept.py --domain money-basics
 python scripts/run_concept.py --domain money-basics --concept "复利" --until package
 ```
 
-概念文走寓言式五段结构：场景钩子 → 寓言 → 揭示 → 讲透（机制+隐喻对照+误解澄清）→ 克制的延伸。排版与热点文共用同一引擎。
+概念文走寓言式结构：场景钩子 → 寓言故事 → 揭示概念 → 讲透（机制+隐喻对照+误解澄清）→ 克制的延伸 → 互动提问。排版与热点文共用同一引擎（`render/flow_cards.py`，1080×1800 书页式连续排版）。
 
 ## 测试
 

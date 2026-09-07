@@ -20,12 +20,13 @@ writing:
 cardify:
   mode: flow
   use_headings: true
-  section_count: 5
+  section_count: 3
   canvas:
     width: 1080
     height: 1800
   layout:
-    f_body: 42
+    f_body: 40
+    track: 0.0
     f_head: 50
     w_body: 600
     w_head: 800

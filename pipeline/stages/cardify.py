@@ -25,10 +25,10 @@ def run_cardify(domain: DomainConfig, body: dict) -> list[dict]:
         tpl.replace("{{domain_name}}", domain.name)
         .replace("{{body}}", json.dumps(body.get("body", []), ensure_ascii=False))
         .replace("{{section_count}}", str(domain.section_count))
-        .replace("{{title_max_chars}}", str(domain.title_max_chars))
     )
     try:
-        result = provider.chat(prompt, system="你是小红书图文排版师，输出 JSON。", temperature=0.3)
+        result = provider.chat(prompt, system="你是小红书图文排版师，输出 JSON。", temperature=0.3,
+                           max_tokens=domain.max_tokens)
         sections = result.get("sections") or []
     except Exception as exc:  # noqa: BLE001
         print(f"[cardify] LLM 结构化失败，使用兜底切分: {exc}")

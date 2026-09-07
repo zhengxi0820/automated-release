@@ -36,7 +36,8 @@ def run_assess(domain: DomainConfig, date: str) -> list[dict]:
             .replace("{{risk_max_for_keep}}", str(domain.assess.get("risk_max_for_keep", 1)))
         )
         try:
-            result = provider.chat(prompt, system="你是选题编辑，输出 JSON。", temperature=0.3)
+            result = provider.chat(prompt, system="你是选题编辑，输出 JSON。", temperature=0.3,
+                           max_tokens=domain.max_tokens)
             set_assess(int(row["id"]), result)
             verdict = result.get("verdict", "weak")
             if verdict == "blocked":

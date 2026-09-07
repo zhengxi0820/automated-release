@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>v4 复利曲线数据海报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF;
+  --ink:#1D1D1F;
+  --ink-2:#6E6E73;
+  --ink-3:#86868B;
+  --hairline:#D2D2D7;
+  --hairline-soft:#ECECF0;
+  --up:#E30000;
+  --serif:"Noto Serif SC","Source Han Serif SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1800px;overflow:hidden}
+body{
+  font-family:var(--serif);
+  background:var(--paper);
+  color:var(--ink);
+  display:flex;flex-direction:column;
+  padding:92px 84px 86px;
+}
+/* ---- kicker ---- */
+.kicker{display:flex;align-items:center;gap:24px}
+.kicker .dot{width:16px;height:16px;background:var(--up)}
+.kicker .lede{font-size:26px;font-weight:500;letter-spacing:.32em;color:var(--ink-2)}
+/* ---- 标题 ---- */
+h1{
+  margin-top:54px;
+  font-size:98px;
+  line-height:1.22;
+  font-weight:900;letter-spacing:.01em;
+}
+/* ---- 图表：中段的视觉锤 ---- */
+.chart{position:relative;height:610px;margin-top:30px}
+.chart svg{display:block;width:912px;height:610px}
+.chart text{font-family:var(--serif)}
+/* ---- 目录：紧凑小字块 ---- */
+.toc{margin-top:auto}
+.toc-label{
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-top:3px solid var(--ink);
+  padding-top:22px;margin-bottom:6px;
+}
+.toc-label .t{font-size:24px;font-weight:900;letter-spacing:.5em}
+.toc-label .e{font-size:20px;font-weight:500;letter-spacing:.24em;color:var(--ink-3)}
+.row{
+  display:flex;align-items:baseline;gap:24px;
+  padding:18px 0;
+  border-bottom:1px solid var(--hairline-soft);
+}
+.row:nth-last-child(1){border-bottom:none}
+.row .no{
+  font-size:28px;font-weight:700;color:var(--ink);
+  min-width:74px;letter-spacing:.02em;
+}
+.row .what{font-size:31px;font-weight:600;letter-spacing:.02em}
+</style>
+</head>
+<body>
+  <div class="kicker">
+    <span class="dot"></span>
+    <span class="lede">钱的小白课 · 讲透复利</span>
+  </div>
+
+  <h1>三十年不卖蛋，<br>10 只鸡变 170 多只</h1>
+
+  <div class="chart">
+    <svg viewBox="0 0 912 610" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三十年里鸡群从 10 只增长到 170 多只的复利曲线">
+      <defs>
+        <linearGradient id="stroke-g" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#1D1D1F"/>
+          <stop offset=".48" stop-color="#1D1D1F"/>
+          <stop offset="1" stop-color="#E30000"/>
+        </linearGradient>
+        <linearGradient id="area-g" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="rgba(227,0,0,.10)"/>
+          <stop offset="1" stop-color="rgba(227,0,0,0)"/>
+        </linearGradient>
+      </defs>
+      <!-- 基线 -->
+      <line x1="8" y1="560" x2="904" y2="560" stroke="#D2D2D7" stroke-width="2"/>
+      <!-- 面积 -->
+      <path d="M 14 548 C 260 540, 470 512, 620 440 C 740 382, 830 260, 898 96 L 898 560 L 14 560 Z"
+            fill="url(#area-g)"/>
+      <!-- 曲线 -->
+      <path d="M 14 548 C 260 540, 470 512, 620 440 C 740 382, 830 260, 898 96"
+            fill="none" stroke="url(#stroke-g)" stroke-width="8" stroke-linecap="round"/>
+      <!-- 终点落线 -->
+      <line x1="898" y1="112" x2="898" y2="560" stroke="#D2D2D7" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
+      <!-- 起点 -->
+      <circle cx="14" cy="548" r="10" fill="#1D1D1F"/>
+      <text x="30" y="514" font-size="30" font-weight="700" fill="#1D1D1F">10 只</text>
+      <!-- 平缓段标注：呼应第二节「攒鸡头十年」 -->
+      <text x="62" y="468" font-size="26" font-weight="500" fill="#86868B">头十年，看不出名堂</text>
+      <line x1="252" y1="484" x2="252" y2="518" stroke="#C9C9CE" stroke-width="2"/>
+      <!-- 终点 -->
+      <circle cx="898" cy="96" r="26" fill="none" stroke="#E30000" stroke-width="3" opacity=".3"/>
+      <circle cx="898" cy="96" r="12" fill="#E30000"/>
+      <text x="880" y="54" font-size="36" font-weight="900" fill="#E30000" text-anchor="end">170+ 只</text>
+      <!-- 轴标 -->
+      <text x="10" y="606" font-size="26" font-weight="500" fill="#86868B">第 1 年</text>
+      <text x="902" y="606" font-size="26" font-weight="500" fill="#86868B" text-anchor="end">第 30 年</text>
+    </svg>
+  </div>
+
+  <section class="toc">
+    <div class="toc-label">
+      <span class="t">目录</span>
+      <span class="e">六节</span>
+    </div>
+    <div class="row"><span class="no">一、</span><span class="what">差距藏在养鸡坡的老规矩</span></div>
+    <div class="row"><span class="no">二、</span><span class="what">攒鸡头十年，看不出名堂</span></div>
+    <div class="row"><span class="no">三、</span><span class="what">鸡瘟从不挑人，挑的是家底</span></div>
+    <div class="row"><span class="no">四、</span><span class="what">蛋留下孵鸡，这件事叫复利</span></div>
+    <div class="row"><span class="no">五、</span><span class="what">坡上每样东西，都能搬回账户</span></div>
+    <div class="row"><span class="no">六、</span><span class="what">先分清哪枚蛋必须吃</span></div>
+  </section>
+</body>
+</html>

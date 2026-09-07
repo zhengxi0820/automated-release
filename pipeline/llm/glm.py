@@ -64,9 +64,14 @@ class GLMProvider(LLMProvider):
                     {k: v for k, v in payload.items() if k != "thinking"}] if json_mode else [payload]
 
         last_resp = None
+        last_exc: Exception | None = None
         content = ""
         for attempt_payload in payloads:
-            resp = requests.post(BASE, headers=headers, json=attempt_payload, timeout=900)
+            try:
+                resp = requests.post(BASE, headers=headers, json=attempt_payload, timeout=900)
+            except requests.exceptions.RequestException as exc:  # 超时/连接失败：换下一组参数
+                last_exc = exc
+                continue
             last_resp = resp
             if resp.status_code == 400:
                 continue  # 参数不支持，降级重试
@@ -77,6 +82,8 @@ class GLMProvider(LLMProvider):
                 break  # 拿到正文
             # 200 但空内容（思考耗尽 token 等）：换下一组参数重试
         if not content.strip():
+            if last_resp is None:
+                raise last_exc  # 全部超时/网络失败
             debug = last_resp.json()
             ch = debug["choices"][0]
             msg = ch.get("message", {})

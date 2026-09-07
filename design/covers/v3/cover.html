@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>v3 大编号杂志风</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAFAFC;
+  --ink:#1D1D1F;
+  --ink-2:#6E6E73;
+  --ink-3:#86868B;
+  --ghost:#E6E6EE;
+  --hairline:#D6D6DD;
+  --seal:#C7372C;
+  --serif:"Noto Serif SC","Source Han Serif SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1800px;overflow:hidden}
+body{
+  font-family:var(--serif);
+  background:var(--paper);
+  color:var(--ink);
+  display:flex;flex-direction:column;
+}
+/* ---- 报头：顶部黑条 + 刊名行 + 粗规线 ---- */
+.topbar{height:16px;background:var(--ink)}
+.masthead{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:42px 84px 36px;
+  border-bottom:3px solid var(--ink);
+}
+.masthead .brand{font-size:31px;font-weight:900;letter-spacing:.18em}
+.masthead .tag{font-size:23px;font-weight:500;letter-spacing:.35em;color:var(--ink-2)}
+/* ---- 巨型幽灵数字「30」，出血右缘 ---- */
+.ghost{
+  position:absolute;top:168px;right:-84px;
+  font-size:700px;font-weight:900;line-height:.8;
+  letter-spacing:-.05em;
+  color:var(--ghost);
+  z-index:0;user-select:none;
+}
+/* ---- 左缘竖排 lede：书脊 ---- */
+.spine{
+  position:absolute;left:32px;top:300px;
+  writing-mode:vertical-rl;
+  font-size:25px;font-weight:500;letter-spacing:.42em;
+  color:var(--ink-3);
+}
+.spine::after{
+  content:"";
+  display:block;width:2px;height:120px;
+  background:var(--ink);
+  margin-top:30px;
+}
+/* ---- 主区 ---- */
+.main{
+  position:relative;z-index:1;flex:1;
+  display:flex;flex-direction:column;
+  padding:0 84px 90px;
+}
+h1{
+  margin-top:164px;
+  font-size:100px;
+  line-height:1.26;
+  font-weight:900;letter-spacing:.01em;
+}
+/* 规线 + 印章：题下的编辑设计行 */
+.deck{
+  margin-top:66px;
+  display:flex;align-items:flex-end;gap:30px;
+}
+.deck .bar{width:92px;height:8px;background:var(--ink);margin-bottom:20px}
+.deck .ln{flex:1;height:1.5px;background:var(--hairline);margin-bottom:20px}
+.seal{
+  width:118px;height:118px;flex:none;
+  background:var(--seal);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:#FFFFFF;font-size:43px;font-weight:900;letter-spacing:.10em;
+  box-shadow:0 2px 8px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.08);
+}
+/* ---- 目录：大号黑色编号 ---- */
+.toc{margin-top:auto}
+.toc-label{
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-top:3px solid var(--ink);
+  padding-top:24px;margin-bottom:8px;
+}
+.toc-label .t{font-size:26px;font-weight:900;letter-spacing:.5em}
+.toc-label .e{font-size:21px;font-weight:500;letter-spacing:.24em;color:var(--ink-3)}
+.row{
+  display:flex;align-items:baseline;gap:26px;
+  padding:24px 0;
+  border-bottom:1px solid var(--hairline);
+}
+.row:nth-last-child(1){border-bottom:none}
+.row .no{
+  font-size:38px;font-weight:900;color:var(--ink);
+  min-width:92px;letter-spacing:.02em;
+}
+.row .what{font-size:31px;font-weight:500;letter-spacing:.02em;color:#3A3A3E}
+</style>
+</head>
+<body>
+  <div class="topbar"></div>
+  <div class="masthead">
+    <span class="brand">钱的小白课</span>
+    <span class="tag">讲透复利</span>
+  </div>
+  <div class="ghost">30</div>
+  <div class="spine">钱的小白课 · 讲透复利</div>
+
+  <div class="main">
+    <h1>三十年不卖蛋，<br>10 只鸡变 170 多只</h1>
+    <div class="deck">
+      <span class="bar"></span>
+      <span class="ln"></span>
+      <span class="seal">复利</span>
+    </div>
+
+    <section class="toc">
+      <div class="toc-label">
+        <span class="t">目录</span>
+        <span class="e">六节</span>
+      </div>
+      <div class="row"><span class="no">一、</span><span class="what">差距藏在养鸡坡的老规矩</span></div>
+      <div class="row"><span class="no">二、</span><span class="what">攒鸡头十年，看不出名堂</span></div>
+      <div class="row"><span class="no">三、</span><span class="what">鸡瘟从不挑人，挑的是家底</span></div>
+      <div class="row"><span class="no">四、</span><span class="what">蛋留下孵鸡，这件事叫复利</span></div>
+      <div class="row"><span class="no">五、</span><span class="what">坡上每样东西，都能搬回账户</span></div>
+      <div class="row"><span class="no">六、</span><span class="what">先分清哪枚蛋必须吃</span></div>
+    </section>
+  </div>
+</body>
+</html>

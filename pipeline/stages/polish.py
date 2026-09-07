@@ -18,6 +18,7 @@ def run_polish(domain: DomainConfig, article_id: int, body: dict, feedback: list
         .replace("{{feedback}}", json.dumps(feedback, ensure_ascii=False))
         .replace("{{title_max_chars}}", str(domain.title_max_chars))
     )
-    result = provider.chat(prompt, system="你是小红书编辑，输出 JSON。", temperature=0.4)
+    result = provider.chat(prompt, system="你是小红书编辑，输出 JSON。", temperature=0.4,
+                           max_tokens=domain.max_tokens)
     mark_feedback_applied(article_id)
     return result

@@ -18,4 +18,5 @@ def run_steelman(domain: DomainConfig, candidate: dict, research: dict | None = 
         .replace("{{reason}}", candidate.get("reason", ""))
         .replace("{{angles}}", domain.angles or "（无角度库，自行给出合适角度）")
     )
-    return provider.chat(prompt, system="你是主笔，输出 JSON。", temperature=0.4)
+    return provider.chat(prompt, system="你是主笔，输出 JSON。", temperature=0.4,
+                         max_tokens=domain.max_tokens)

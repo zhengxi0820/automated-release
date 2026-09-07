@@ -39,12 +39,12 @@ def test_run_concept_write_shapes_prompt(concept_domain, monkeypatch):
         captured["max_tokens"] = max_tokens
         return CONCEPT_DRAFT
 
-    monkeypatch.setattr("pipeline.llm.deepseek.DeepSeekProvider.chat", fake_chat)
+    monkeypatch.setattr("pipeline.llm.glm.GLMProvider.chat", fake_chat)
     result = run_concept_write(concept_domain, "复利")
     assert result["title"] == "越存越穷？借鸡蛋的故事"
     assert "复利" in captured["prompt"]
     assert "2800" in captured["prompt"] or "2600" in captured["prompt"]  # 字数契约注入
-    assert captured["max_tokens"] == 8192
+    assert captured["max_tokens"] == 32768
 
 
 def test_run_concept_write_rewrites_on_fabrication(concept_domain, monkeypatch):
@@ -56,7 +56,7 @@ def test_run_concept_write_rewrites_on_fabrication(concept_domain, monkeypatch):
             return {**CONCEPT_DRAFT, "body": [{"type": "hook", "text": "我实测了这个概念，很神奇。"}]}
         return CONCEPT_DRAFT
 
-    monkeypatch.setattr("pipeline.llm.deepseek.DeepSeekProvider.chat", fake_chat)
+    monkeypatch.setattr("pipeline.llm.glm.GLMProvider.chat", fake_chat)
     result = run_concept_write(concept_domain, "复利")
     assert len(calls) == 2  # 触发纠错重写
     assert result["self_check"]["no_fabricated_experience"] == "pass"

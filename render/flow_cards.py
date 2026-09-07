@@ -201,12 +201,12 @@ def paginate(units: list[dict], L: Layout) -> list[list[dict]]:
         h = L.lh_head if it["t"] == "h" else L.lh_body
         need_gap = pending_gap if cur else 0  # 页首不带段前距
         if it["t"] == "h":
-            if cur and used + need_gap + h + L.head_after + 2 * L.lh_body > L.content_h:
+            # 只要求标题后跟得上 1 行正文：宁要紧凑续排，不要大片留白
+            if cur and used + need_gap + h + L.head_after + L.lh_body > L.content_h:
                 flush()
                 continue
-        elif it["first"] and cur and used + need_gap + 2 * L.lh_body > L.content_h:
-            flush()  # 段落首行放不下 2 行：整段从下页起
-            continue
+        elif it["first"] and cur and used + need_gap + L.lh_body > L.content_h:
+            flush()  # 段落首行放不下：整段从下页起（行级流会自动续排，不留白）
         if used + need_gap + h <= L.content_h:
             if need_gap:
                 cur.append({"kind": "gap", "h": need_gap})
@@ -308,6 +308,8 @@ def render_flow_pages(
 
     out_dir = OUTPUT_DIR / domain_id / str(article_id)
     out_dir.mkdir(parents=True, exist_ok=True)
+    for old in out_dir.glob("page_*.png"):  # 清理上一版残留（页数可能变少）
+        old.unlink()
 
     shots: list[tuple[str, str]] = []
     if use_headings and headings:

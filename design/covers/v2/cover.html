@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>v2 深色高级感</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-dark:#1D1D1F;
+  --on-dark:#F5F5F7;
+  --dim:#A1A1A6;
+  --dim-2:#86868B;
+  --gold-1:#FFD60A;
+  --gold-2:#FF9F0A;
+  --hairline-dark:rgba(255,255,255,.14);
+  --serif:"Noto Serif SC","Source Han Serif SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1800px;overflow:hidden}
+body{
+  font-family:var(--serif);
+  background:linear-gradient(180deg,#1D1D1F 0%,#000000 100%);
+  color:var(--on-dark);
+  display:flex;flex-direction:column;
+  padding:104px 72px 96px;
+  position:relative;
+}
+/* keynote 舞台光：右上一束金色的光晕，左下一丝余晖 */
+body::before{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    radial-gradient(780px 560px at 82% 14%, rgba(255,159,10,.16), transparent 64%),
+    radial-gradient(620px 420px at 6% 82%, rgba(255,214,10,.05), transparent 60%);
+  pointer-events:none;
+}
+body > *{position:relative;z-index:1}
+/* ---- 发布会式胶囊徽章 ---- */
+.badge{
+  display:inline-flex;align-self:flex-start;
+  border:1.5px solid rgba(255,255,255,.32);
+  border-radius:980px;
+  padding:15px 38px;
+  font-size:25px;font-weight:500;letter-spacing:.30em;
+  color:#C7C7CC;
+}
+/* ---- 标题：900 白字，数字金色渐变 ---- */
+.hero{margin-top:178px}
+h1{
+  font-size:106px;
+  line-height:1.26;
+  font-weight:900;
+  letter-spacing:.01em;
+  color:var(--on-dark);
+}
+.gold{
+  background:linear-gradient(92deg,var(--gold-1) 8%,var(--gold-2) 92%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+}
+.rule{
+  margin-top:60px;
+  width:136px;height:7px;border-radius:980px;
+  background:linear-gradient(90deg,var(--gold-1),var(--gold-2));
+}
+/* ---- 目录：暗场里的细规线 + 金色编号 ---- */
+.toc{margin-top:auto}
+.toc-label{
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-top:1.5px solid rgba(255,255,255,.42);
+  padding-top:24px;margin-bottom:8px;
+}
+.toc-label .t{font-size:25px;font-weight:900;letter-spacing:.5em;color:var(--on-dark)}
+.toc-label .e{font-size:21px;font-weight:500;letter-spacing:.24em;color:var(--dim-2)}
+.row{
+  display:flex;align-items:baseline;gap:26px;
+  padding:27px 0;
+  border-bottom:1px solid var(--hairline-dark);
+}
+.row:nth-last-child(1){border-bottom:none}
+.row .no{
+  font-size:29px;font-weight:700;color:var(--gold-2);
+  min-width:78px;letter-spacing:.02em;
+}
+.row .what{font-size:33px;font-weight:500;letter-spacing:.02em;color:var(--on-dark)}
+</style>
+</head>
+<body>
+  <div class="badge">钱的小白课 · 讲透复利</div>
+
+  <section class="hero">
+    <h1>三十年不卖蛋，<br><span class="gold">10 只鸡变 170 多只</span></h1>
+    <div class="rule"></div>
+  </section>
+
+  <section class="toc">
+    <div class="toc-label">
+      <span class="t">目录</span>
+      <span class="e">六节</span>
+    </div>
+    <div class="row"><span class="no">一、</span><span class="what">差距藏在养鸡坡的老规矩</span></div>
+    <div class="row"><span class="no">二、</span><span class="what">攒鸡头十年，看不出名堂</span></div>
+    <div class="row"><span class="no">三、</span><span class="what">鸡瘟从不挑人，挑的是家底</span></div>
+    <div class="row"><span class="no">四、</span><span class="what">蛋留下孵鸡，这件事叫复利</span></div>
+    <div class="row"><span class="no">五、</span><span class="what">坡上每样东西，都能搬回账户</span></div>
+    <div class="row"><span class="no">六、</span><span class="what">先分清哪枚蛋必须吃</span></div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>v1 极简纸面加强版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF;
+  --ink:#1D1D1F;
+  --ink-2:#6E6E73;
+  --ink-3:#86868B;
+  --hairline:#D2D2D7;
+  --hairline-soft:#E8E8ED;
+  --accent:#E85D04;
+  --serif:"Noto Serif SC","Source Han Serif SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1800px;overflow:hidden}
+body{
+  font-family:var(--serif);
+  background:var(--paper);
+  color:var(--ink);
+  display:flex;flex-direction:column;
+  padding:100px 68px 96px;
+}
+/* ---- kicker：唯一的小色点 + 拉开字距的 lede ---- */
+.kicker{display:flex;align-items:center;gap:26px}
+.kicker .bar{width:56px;height:9px;background:var(--accent)}
+.kicker .lede{font-size:27px;font-weight:500;letter-spacing:.34em;color:var(--ink-2)}
+/* ---- 超大标题：占上半屏，强烈的大小对比来源 ---- */
+.hero{margin-top:244px}
+h1{
+  font-size:106px;
+  line-height:1.22;
+  font-weight:900;
+  letter-spacing:.01em;
+}
+/* ---- 目录：缩成小字块，压在底部 ---- */
+.toc{margin-top:auto}
+.toc-label{
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-top:3px solid var(--ink);
+  padding-top:24px;margin-bottom:8px;
+}
+.toc-label .t{font-size:26px;font-weight:900;letter-spacing:.5em}
+.toc-label .e{font-size:21px;font-weight:500;letter-spacing:.24em;color:var(--ink-3)}
+.row{
+  display:flex;align-items:baseline;gap:26px;
+  padding:26px 0;
+  border-bottom:1px solid var(--hairline-soft);
+}
+.row:nth-last-child(1){border-bottom:none}
+.row .no{
+  font-size:29px;font-weight:700;color:var(--accent);
+  min-width:78px;letter-spacing:.02em;
+}
+.row .what{font-size:34px;font-weight:600;letter-spacing:.02em}
+</style>
+</head>
+<body>
+  <div class="kicker">
+    <span class="bar"></span>
+    <span class="lede">钱的小白课 · 讲透复利</span>
+  </div>
+
+  <section class="hero">
+    <h1>三十年不卖蛋，<br>10 只鸡变 170 多只</h1>
+  </section>
+
+  <section class="toc">
+    <div class="toc-label">
+      <span class="t">目录</span>
+      <span class="e">六节</span>
+    </div>
+    <div class="row"><span class="no">一、</span><span class="what">差距藏在养鸡坡的老规矩</span></div>
+    <div class="row"><span class="no">二、</span><span class="what">攒鸡头十年，看不出名堂</span></div>
+    <div class="row"><span class="no">三、</span><span class="what">鸡瘟从不挑人，挑的是家底</span></div>
+    <div class="row"><span class="no">四、</span><span class="what">蛋留下孵鸡，这件事叫复利</span></div>
+    <div class="row"><span class="no">五、</span><span class="what">坡上每样东西，都能搬回账户</span></div>
+    <div class="row"><span class="no">六、</span><span class="what">先分清哪枚蛋必须吃</span></div>
+  </section>
+</body>
+</html>
