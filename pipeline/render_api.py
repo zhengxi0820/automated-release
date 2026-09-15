@@ -78,7 +78,7 @@ def _build_flow_package(domain: DomainConfig, article_id: int, body: dict):
     if use_headings:
         page_rows.append({"kind": "cover", "text": body.get("title", "")})
     for i, units in enumerate(pages_units, start=1):
-        text = "".join(ln for u in units for ln in (u["lines"] if u["kind"] != "gap" else []))
+        text = "\n".join(ln for u in units for ln in (u["lines"] if u["kind"] != "gap" else []))
         page_rows.append({"kind": "page", "text": text})
     insert_cards(article_id, page_rows)
 
@@ -87,6 +87,7 @@ def _build_flow_package(domain: DomainConfig, article_id: int, body: dict):
         title=body.get("title", ""),
         layout=L,
         use_headings=use_headings,
+        lede=domain.name,
     )
     return pngs, flow_article_text(sections, use_headings)
 

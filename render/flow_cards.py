@@ -255,6 +255,7 @@ def _page_html(L: Layout, body: str, font_link: str) -> str:
 
 
 def cover_html(L: Layout, title: str, headings: list[str], lede: str = "") -> str:
+    """v1 极简纸面加强版：kicker 短杠 + 特大标题压上半屏 + 底部紧凑目录。"""
     items = ""
     for i, h in enumerate(headings):
         h = h.strip()
@@ -263,17 +264,53 @@ def cover_html(L: Layout, title: str, headings: list[str], lede: str = "") -> st
         else:
             no = (CN_NUM[i] + "、") if i < len(CN_NUM) else f"{i + 1}."
             what = h
-        items += f'<div class="toc-item"><span class="no">{no}</span><span class="what">{what}</span></div>'
-    lede_html = f'<p class="lede">{lede}</p>' if lede else ""
-    title_lines = title.split("\n")[:2]
+        items += f'<div class="row"><span class="no">{no}</span><span class="what">{what}</span></div>'
+
+    title_lines = title.split("\n")[:2] if "\n" in title else _break_title(title)
+    longest = max((len(l) for l in title_lines), default=0)
+    size = 106 if longest <= 11 else (88 if longest <= 13 else 76)
     title_html = "<br>".join(title_lines)
+    toc_count = CN_NUM[len(headings) - 1] + "节" if 0 < len(headings) <= len(CN_NUM) else f"{len(headings)} 节"
+    lede_html = f'<span class="lede">{lede}</span>' if lede else ""
     body = f"""
-<main style="flex:1;display:flex;flex-direction:column;justify-content:center">
-  {lede_html}
-  <h1 class="cover-title">{title_html}</h1>
-  <div class="toc">{items}</div>
-</main>"""
+  <div class="kicker"><span class="bar"></span>{lede_html}</div>
+  <section class="hero"><h1 style="font-size:{size}px">{title_html}</h1></section>
+  <section class="toc">
+    <div class="toc-label"><span class="t">目 录</span><span class="e">{toc_count}</span></div>
+    {items}
+  </section>"""
+    cover_css = """
+.kicker { display: flex; align-items: center; gap: 26px; }
+.kicker .bar { width: 56px; height: 9px; background: #E85D04; }
+.kicker .lede { font-size: 27px; font-weight: 500; letter-spacing: .34em; color: #6E6E73; }
+.hero { margin-top: 200px; }
+.cover-title, .hero h1 { line-height: 1.22; font-weight: 900; letter-spacing: .01em; }
+.toc { margin-top: auto; }
+.toc-label {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-top: 3px solid #1D1D1F; padding-top: 24px; margin-bottom: 8px;
+}
+.toc-label .t { font-size: 26px; font-weight: 900; letter-spacing: .5em; color: #1D1D1F; }
+.toc-label .e { font-size: 21px; font-weight: 500; letter-spacing: .24em; color: #86868B; }
+.row { display: flex; align-items: baseline; gap: 26px; padding: 26px 0; border-bottom: 1px solid #E8E8ED; }
+.row:last-child { border-bottom: none; }
+.row .no { font-size: 29px; font-weight: 700; color: #E85D04; min-width: 78px; letter-spacing: .02em; }
+.row .what { font-size: 34px; font-weight: 600; letter-spacing: .02em; color: #1D1D1F; }
+"""
+    body = f"<style>{cover_css}</style>" + body
     return _page_html(L, body, L.google_fonts)
+
+
+def _break_title(title: str) -> list[str]:
+    """无显式换行时按 10-11 字断行。"""
+    if len(title) <= 11:
+        return [title]
+    cut = title.rfind("，", 4, 13)
+    if cut == -1:
+        cut = title.rfind("？", 4, 13)
+    if cut == -1:
+        cut = min(10, len(title) - 1)
+    return [title[:cut + 1], title[cut + 1:]]
 
 
 def flow_page_html(L: Layout, units: list[dict], font_link: bool = True) -> str:
@@ -299,6 +336,7 @@ def render_flow_pages(
     title: str,
     layout: Layout,
     use_headings: bool = True,
+    lede: str = "",
 ) -> list[Path]:
     """分页 + 渲染 PNG，返回图片路径列表。纯 HTML 生成失败不涉及 Chrome。"""
     if not CHROME.exists():
@@ -313,7 +351,7 @@ def render_flow_pages(
 
     shots: list[tuple[str, str]] = []
     if use_headings and headings:
-        shots.append(("page_01", cover_html(layout, title, headings)))
+        shots.append(("page_01", cover_html(layout, title, headings, lede=lede)))
         start = 2
     else:
         shots.append(("page_01", flow_page_html(layout, pages_units[0] if pages_units else [])))
