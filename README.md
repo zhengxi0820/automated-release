@@ -6,7 +6,7 @@
 - 多领域共存：流水线逻辑与领域配置分层，`domains/` 下每目录一个领域，可并行运行
 - 两种内容类型：
   - `hotspot`（热点评论）：`ai-tools`——AIHOT 采集热点，评估后成观点文
-  - `concept`（概念科普）：`ai-basics` / `money-basics`——从概念池取题，寓言式讲透一个概念
+  - `concept`（概念科普）：`ai-basics` / `money-basics`——从概念池取题，按概念选叙事载体（寓言/场景推演/反直觉现象等）讲透
 - 文档先行：见 `docs/`（需求、架构、接口、卡片排版规范）
 - 回归测试：`tests/`（固定 fixture，防行为漂移）
 
@@ -15,6 +15,7 @@
 - [需求文档](docs/需求文档.md)
 - [架构文档](docs/架构文档.md)
 - [接口文档](docs/接口文档.md)
+- [写作 Skill 说明](docs/写作skill说明.md)（style_core 技法核心的设计依据与来源）
 - [AIHOT API 参考](docs/AIHOT_API参考.md)（数据源接口字段说明）
 - [AIHOT Skill 说明](docs/AIHOT_Skill说明.md)（官方 Skill 规则，含安全边界）
 
@@ -52,7 +53,7 @@ python scripts/run_concept.py --domain money-basics
 python scripts/run_concept.py --domain money-basics --concept "复利" --until package
 ```
 
-概念文走寓言式结构：场景钩子 → 寓言故事 → 揭示概念 → 讲透（机制+隐喻对照+误解澄清）→ 克制的延伸 → 互动提问。排版与热点文共用同一引擎（`render/flow_cards.py`，1080×1800 书页式连续排版）。
+概念文先按概念特性选叙事载体（寓言/场景推演/反直觉现象/历史事件/思想实验）：场景钩子 → 载体叙事 → 揭示概念 → 讲透（机制+隐喻对照+误解澄清）→ 克制的延伸 → 互动提问。排版与热点文共用同一引擎（`render/flow_cards.py`，1080×1800 书页式连续排版）。
 
 ## 测试
 

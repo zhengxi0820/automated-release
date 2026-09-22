@@ -8,6 +8,9 @@ import re
 from ..config import DomainConfig, PROMPTS_DIR
 from ..llm import get_provider
 
+# 共享写作技法核心（见 prompts/style_core.md），由各成文阶段注入模板
+STYLE_CORE = (PROMPTS_DIR / "style_core.md").read_text(encoding="utf-8")
+
 FABRICATED_PATTERNS = [
     "我实测", "我测试", "我第一时间", "我拿", "我用了", "我试用",
     "我自己跑", "我试了", "我体验", "我上手", "实测",
@@ -29,7 +32,8 @@ def run_write(domain: DomainConfig, candidate: dict, research: dict, steelman: d
     tpl = (PROMPTS_DIR / "write.md").read_text(encoding="utf-8")
 
     prompt = (
-        tpl.replace("{{domain_name}}", domain.name)
+        tpl.replace("{{style_core}}", STYLE_CORE)
+        .replace("{{domain_name}}", domain.name)
         .replace("{{persona}}", domain.persona or "（未配置人设，按通用活人感规则写）")
         .replace("{{steelman}}", json.dumps(steelman or {}, ensure_ascii=False))
         .replace("{{facts_json}}", json.dumps(research.get("facts", []), ensure_ascii=False))
@@ -49,6 +53,8 @@ def run_write(domain: DomainConfig, candidate: dict, research: dict, steelman: d
             "标题不得出现“实测”；只保留用户素材中明确存在的真实经历。其余规则不变。"
         )
         result = provider.chat(prompt + "\n\n" + fix, system="你是小红书写手，输出 JSON。", temperature=0.3)
-        result["self_check"] = {"ai_flavor": "pass", "facts_intact": "pass",
-                                "no_fabricated_experience": "pass" if not _has_fabricated_experience(result) else "fail"}
+        result["self_check"] = {
+            **(result.get("self_check") or {}),
+            "no_fabricated_experience": "pass" if not _has_fabricated_experience(result) else "fail",
+        }
     return result

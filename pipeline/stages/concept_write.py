@@ -1,10 +1,10 @@
-"""概念科普成文阶段：寓言式讲透一个概念（单次 LLM 调用）。"""
+"""概念科普成文阶段：按概念选叙事载体讲透（单次 LLM 调用）。"""
 
 from __future__ import annotations
 
 from ..config import DomainConfig, PROMPTS_DIR
 from ..llm import get_provider
-from .write import FABRICATED_PATTERNS, _has_fabricated_experience
+from .write import FABRICATED_PATTERNS, STYLE_CORE, _has_fabricated_experience
 
 
 def run_concept_write(domain: DomainConfig, concept: str) -> dict:
@@ -17,7 +17,8 @@ def run_concept_write(domain: DomainConfig, concept: str) -> dict:
         else "（本领域无强制免责声明）"
     )
     prompt = (
-        tpl.replace("{{domain_name}}", domain.name)
+        tpl.replace("{{style_core}}", STYLE_CORE)
+        .replace("{{domain_name}}", domain.name)
         .replace("{{persona}}", domain.persona or "（未配置人设，按通用零门槛科普规则写）")
         .replace("{{concept}}", concept)
         .replace("{{title_max_chars}}", str(domain.title_max_chars))
